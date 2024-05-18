@@ -49,6 +49,11 @@ $db->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejemplo</title>
 
+    <!-- librerias -->
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <script defer src="assets/js/bootstrap.bundle.min.js"></script>
+    <!-- jquery -->
     <script src="js/jquery-3.7.1.min.js"></script>
 </head>
 <body>
