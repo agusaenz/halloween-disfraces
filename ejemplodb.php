@@ -47,7 +47,9 @@ $db->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Ejemplo</title>
+
+    <script src="js/jquery-3.7.1.min.js"></script>
 </head>
 <body>
     <h1>hola</h1>
