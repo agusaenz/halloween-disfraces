@@ -25,6 +25,14 @@
 
     <script>
         function cargarCliente() {
+            /* 
+            FALTA:
+            - agregar validaciones
+            - modificar datos segun variables ingresadas
+            */
+
+            // guardo en variables los datos ingresados, utilizando el selector
+            // por id de jquery.
             let apellidos = $('#apellidos').val();
             let nombres = $('#nombres').val();
             let numeroDocumento = $('#numeroDocumento').val();
@@ -32,11 +40,11 @@
             let domicilio = $('#domicilio').val();
             let correo = $('#correo').val();
 
+            // armo un string de "consulta url" datos, donde guardo todas las variables
             let datos = "apellidos=" + apellidos + "&nombres=" + nombres + "&numeroDocumento=" + numeroDocumento  + "&telefono=" + telefono + 
             "&domicilio=" + domicilio + "&correo=" + correo;
 
-            // console.log(datos);
-
+            // funcion ajax que usamos siempre que enviemos informacion a un archivo back
             $.ajax({
                 url: 'ajax/cliente/guardarCliente.php',
                 type: 'POST',
