@@ -8,10 +8,10 @@
 
     <!-- librerias -->
     <!-- bootstrap -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <script defer src="assets/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="assets/includes/css/bootstrap.min.css">
+    <script defer src="assets/includes/js/bootstrap.bundle.min.js"></script>
     <!-- jquery -->
-    <script src="assets/js/jquery-3.7.1.min.js"></script>
+    <script src="assets/includes/js/jquery-3.7.1.min.js"></script>
 
     <style>
         body {
