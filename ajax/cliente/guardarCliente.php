@@ -15,8 +15,8 @@ try {
 
 date_default_timezone_set("America/Argentina/Buenos_Aires"); // Defino huso horario
 $fechaactual = new \Datetime(); // Guardo la fecha de hoy con una función propia de PHP
-$retorno = array(); // Creo el arreglo que será retornado al front
-$errores = array(); // Arreglo de errores para retornar
+$retorno = []; // Creo el arreglo que será retornado al front
+$errores = []; // Arreglo de errores para retornar
 
 // recupero los datos mandados desde el front
 // y los sanitizo para prevenir inyecciones sql
@@ -39,11 +39,11 @@ if (!empty($errores)) {
 
 try {
     // Armo la sentencia SQL
-    $sqlInsert = "INSERT INTO cliente (apellidos, nombres, numeroDocumento, telefono, domicilio, correo, fechaalta)
+    $sqlInsert = "INSERT INTO cliente (apellidos, nombres, numero_documento, telefono, domicilio, correo, fecha_alta)
                   VALUES (:apellidos, :nombres, :numeroDocumento, :telefono, :domicilio, :correo, :fechaalta)";
     
     // Armo un arreglo para bindear los values de la sentencia con mis variables creadas
-    $param = array(
+    $param = [
         ":apellidos" => $apellidos,
         ":nombres" => $nombres,
         ":numeroDocumento" => $numeroDocumento,
@@ -51,7 +51,7 @@ try {
         ":domicilio" => $domicilio,
         ":correo" => $correo,
         ":fechaalta" => $fechaactual->format("Y-m-d H:i:s")
-    );
+    ];
 
     // Preparo la base de datos
     $stmtInsert = $db->prepare($sqlInsert);
