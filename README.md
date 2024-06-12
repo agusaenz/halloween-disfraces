@@ -51,38 +51,13 @@ El software permite realizar las siguientes acciones:
 - **Estados de alquiler**: Indicar si un alquiler ha sido devuelto o no.
 - **Ver ganancias y depósitos**: Consultar las ganancias generadas y los depósitos recibidos.
 
-## Cómo empezar
+## Páginas
 
-Para utilizar este software, sigue los siguientes pasos:
+Diferentes páginas/secciones del software:
 
-1. Clona este repositorio a tu máquina local:
-    ```sh
-    git clone https://github.com/tu-usuario/tu-repositorio.git
-    ```
-2. Instala las dependencias necesarias:
-    ```sh
-    npm install
-    ```
-3. Configura las variables de entorno necesarias (ver `example.env`).
-4. Inicia el servidor:
-    ```sh
-    npm start
-    ```
-
-## Contribuciones
-
-Las contribuciones son bienvenidas. Por favor, sigue los siguientes pasos:
-
-1. Haz un fork de este repositorio.
-2. Crea una nueva rama con tu funcionalidad: `git checkout -b mi-nueva-funcionalidad`.
-3. Realiza los cambios y haz commit de los mismos: `git commit -m 'Agregar nueva funcionalidad'`.
-4. Haz push a la rama: `git push origin mi-nueva-funcionalidad`.
-5. Abre un Pull Request.
-
-## Licencia
-
-Este proyecto está bajo la licencia MIT. Consulta el archivo `LICENSE` para más detalles.
-
----
-
-¡Gracias por utilizar nuestro software de alquiler de disfraces de Halloween! Si tienes alguna pregunta o sugerencia, no dudes en contactarnos.
+- **login**: Iniciar sesión.
+- **index**: Página de inicio con iconos para las funciones.
+- **clientes**: Única sección de clientes, con lista, búsqueda, funciones propias y modal para agregar cliente.
+- **listaAlquileres**: Listado de alquileres con búsqueda y acciones.
+- **nuevoAlquiler**: Crear alquiler.
+- **administracionIndex**: Página principal de administración, discutir funciones.

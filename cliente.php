@@ -16,8 +16,8 @@
     <style>
         body {
             padding: 20px;
-        }   
-                               /*  holaaa */
+        }
+
         .form-control {
             margin-bottom: 15px;
         }
