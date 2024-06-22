@@ -4,10 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lista de Alquileres</title>
-    <link
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+    <link rel="stylesheet" href="assets/includes/css/bootstrap.min.css" />
+    <script defer src="assets/includes/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/includes/js/jquery-3.7.1.min.js"></script>
     <style>
       .btn-lg-custom {
         padding: 10px 20px;
@@ -15,6 +14,7 @@
       }
     </style>
   </head>
+
   <body>
     <div class="container mt-5">
       <h1 class="text-center">Lista de Alquileres</h1>
@@ -37,7 +37,7 @@
         </div>
         <div class="col-md-6">
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-2">
               <button class="btn btn-primary btn-block" id="buscarBtn">
                 Buscar
               </button>
@@ -70,8 +70,6 @@
       </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <script>
       $(document).ready(function () {
         let alquileres = [
