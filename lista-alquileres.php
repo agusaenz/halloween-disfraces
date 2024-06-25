@@ -139,7 +139,7 @@
                                 <td>${alquiler.precio}</td>
                                 <td>${alquiler.deposito}</td>
                                 <td class="text-center">
-                                    <button class="btn btn-info verAlquilerBtn" data-id="${alquiler.id}">Ver</button>
+                                    <button class="btn btn-primary verAlquilerBtn" data-id="${alquiler.id}">Ver</button>
                                     <button class="btn btn-danger eliminarAlquilerBtn ml-2" data-id="${alquiler.id}">Eliminar</button>
                                 </td>
                             </tr>

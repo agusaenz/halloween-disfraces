@@ -260,7 +260,7 @@
                                 <td>${person.telefono}</td>
                                 <td>${person.direccion}</td>
                                 <td class="text-center align-middle">
-                                    <button class="btn btn-warning edit-btn" data-id="${person.id}">Editar</button>
+                                    <button class="btn btn-primary edit-btn" data-id="${person.id}">Editar</button>
                                     <button class="btn btn-danger delete-btn" data-id="${person.id}">Eliminar</button>
                                 </td>
                             </tr>
