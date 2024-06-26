@@ -8,6 +8,28 @@
     <script defer src="assets/includes/js/bootstrap.bundle.min.js"></script>
     <script src="assets/includes/js/jquery-3.7.1.min.js"></script>
     <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #b39b9b;
+        font-family: "Roboto", sans-serif;
+        font-size: 0.9rem;
+        margin: 0;
+      }
+      .custom-form {
+        background: white;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        overflow: auto;
+        min-width: 300px;
+        min-height: 400px;
+        width: 100%;
+        max-width: 1300px;
+        max-height: 900px;
+      }
       .btn-lg-custom {
         padding: 10px 20px;
         font-size: 1.25rem;
@@ -16,58 +38,60 @@
   </head>
 
   <body>
-    <div class="container mt-5">
-      <h1 class="text-center">Lista de Alquileres</h1>
-      <div class="row">
-        <div class="col-md-3">
-          <input
-            type="text"
-            id="nombreBusqueda"
-            class="form-control"
-            placeholder="Buscar por nombre o apellido..."
-          />
-        </div>
-        <div class="col-md-3">
-          <input
-            type="text"
-            id="dniBusqueda"
-            class="form-control"
-            placeholder="Buscar por DNI..."
-          />
-        </div>
-        <div class="col-md-6">
-          <div class="row">
-            <div class="col-md-2">
-              <button class="btn btn-primary btn-block" id="buscarBtn">
-                Buscar
-              </button>
-            </div>
-            <div class="col-md-6">
-              <button class="btn btn-secondary btn-block" id="borrarFiltrosBtn">
-                Borrar Filtros
-              </button>
-            </div>
+    <div class="container">
+      <form class="custom-form" id="resizable-form">
+        <h1 class="text-center">Lista de Alquileres</h1>
+        <div class="row">
+          <div class="col-md-3">
+            <input
+              type="text"
+              id="nombreBusqueda"
+              class="form-control"
+              placeholder="Buscar por nombre o apellido..."
+            />
+          </div>
+          <div class="col-md-3">
+            <input
+              type="text"
+              id="dniBusqueda"
+              class="form-control"
+              placeholder="Buscar por DNI..."
+            />
+          </div>
+          <div class="col-md-1">
+            <button type="button" class="btn btn-primary" id="buscarBtn">
+              Buscar
+            </button>
+          </div>
+          <div class="col-md-2">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              id="borrarFiltrosBtn"
+            >
+              Borrar Filtros
+            </button>
           </div>
         </div>
-      </div>
-      <div class="row mt-3">
-        <div class="col-md-12">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th>Apellido y Nombre</th>
-                <th>DNI</th>
-                <th>Fecha de Alquiler</th>
-                <th>Fecha de Devolución</th>
-                <th>Precio</th>
-                <th>Depósito</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody id="listaAlquileres"></tbody>
-          </table>
+        <div class="row mt-3">
+          <div class="col-md-12">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Apellido y Nombre</th>
+                  <th>DNI</th>
+                  <th>Fecha de Alquiler</th>
+                  <th>Fecha de Devolución</th>
+                  <th>Precio</th>
+                  <th>Depósito</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="listaAlquileres"></tbody>
+            </table>
+          </div>
         </div>
-      </div>
+      </form>
     </div>
 
     <script>
@@ -131,19 +155,19 @@
               alquiler.dni.includes(filtroDNI)
             ) {
               lista.append(`
-                            <tr data-id="${alquiler.id}">
-                                <td>${alquiler.nombreCliente}</td>
-                                <td>${alquiler.dni}</td>
-                                <td>${alquiler.fechaAlquiler}</td>
-                                <td>${alquiler.fechaDevolucion}</td>
-                                <td>${alquiler.precio}</td>
-                                <td>${alquiler.deposito}</td>
-                                <td class="text-center">
-                                    <button class="btn btn-primary verAlquilerBtn" data-id="${alquiler.id}">Ver</button>
-                                    <button class="btn btn-danger eliminarAlquilerBtn ml-2" data-id="${alquiler.id}">Eliminar</button>
-                                </td>
-                            </tr>
-                        `);
+                <tr data-id="${alquiler.id}">
+                    <td>${alquiler.nombreCliente}</td>
+                    <td>${alquiler.dni}</td>
+                    <td>${alquiler.fechaAlquiler}</td>
+                    <td>${alquiler.fechaDevolucion}</td>
+                    <td>${alquiler.precio}</td>
+                    <td>${alquiler.deposito}</td>
+                    <td class="text-center">
+                        <button class="btn btn-primary verAlquilerBtn" data-id="${alquiler.id}">Ver</button>
+                        <button class="btn btn-danger eliminarAlquilerBtn ml-2" data-id="${alquiler.id}">Eliminar</button>
+                    </td>
+                </tr>
+              `);
             }
           });
         }
@@ -158,6 +182,7 @@
 
         $("#nombreBusqueda, #dniBusqueda").keypress(function (e) {
           if (e.which == 13) {
+            e.preventDefault();
             buscarAlquiler();
           }
         });

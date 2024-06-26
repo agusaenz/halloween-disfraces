@@ -9,6 +9,28 @@
     <script defer src="assets/includes/js/bootstrap.bundle.min.js"></script>
 
     <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #b39b9b;
+        font-family: "Roboto", sans-serif;
+        font-size: 0.9rem;
+        margin: 0;
+      }
+      .custom-form {
+        background: white;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        overflow: auto;
+        min-width: 300px;
+        min-height: 400px;
+        width: 100%;
+        max-width: 1300px;
+        max-height: 900px;
+      }
       .btn-lg-custom {
         padding: 20px 35px;
         font-size: 1.5rem;
@@ -19,60 +41,69 @@
     </style>
   </head>
   <body>
-    <div class="container mt-5">
-      <h1 class="text-center">Clientes</h1>
-      <div class="row">
-        <div class="col-md-3">
-          <input
-            type="text"
-            id="searchName"
-            class="form-control"
-            placeholder="Buscar por nombre o apellido..."
-          />
+    <div class="container">
+      <form class="custom-form" id="resizable-form">
+        <h1 class="text-center">Clientes</h1>
+        <div class="row">
+          <div class="col-md-3">
+            <input
+              type="text"
+              id="searchName"
+              class="form-control"
+              placeholder="Buscar por nombre o apellido..."
+            />
+          </div>
+          <div class="col-md-3">
+            <input
+              type="text"
+              id="searchDNI"
+              class="form-control"
+              placeholder="Buscar por DNI..."
+            />
+          </div>
+          <div class="col-md-1">
+            <button type="button" class="btn btn-primary" id="searchBtn">
+              Buscar
+            </button>
+          </div>
+          <div class="col-md-2">
+            <button
+              type="button"
+              class="btn btn-secondary move-left"
+              id="clearFiltersBtn"
+            >
+              Borrar Filtros
+            </button>
+          </div>
+          <div class="col-md-3">
+            <button
+              type="button"
+              class="btn btn-success btn-lg-custom"
+              id="addClientBtn"
+              data-bs-toggle="modal"
+              data-bs-target="#addModal"
+            >
+              Agregar Cliente
+            </button>
+          </div>
         </div>
-        <div class="col-md-3">
-          <input
-            type="text"
-            id="searchDNI"
-            class="form-control"
-            placeholder="Buscar por DNI..."
-          />
+        <div class="row mt-3">
+          <div class="col-md-12">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Apellido y Nombre</th>
+                  <th>DNI</th>
+                  <th>Telefono</th>
+                  <th>Domicilio</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="person-list"></tbody>
+            </table>
+          </div>
         </div>
-        <div class="col-md-1">
-          <button class="btn btn-primary" id="searchBtn">Buscar</button>
-        </div>
-        <div class="col-md-2">
-          <button class="btn btn-secondary move-left" id="clearFiltersBtn">
-            Borrar Filtros
-          </button>
-        </div>
-        <div class="col-md-3">
-          <button
-            class="btn btn-success btn-lg-custom"
-            id="addClientBtn"
-            data-toggle="modal"
-            data-target="#addModal"
-          >
-            Agregar Cliente
-          </button>
-        </div>
-      </div>
-      <div class="row mt-3">
-        <div class="col-md-12">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th>Apellido y Nombre</th>
-                <th>DNI</th>
-                <th>Telefono</th>
-                <th>Domicilio</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody id="person-list"></tbody>
-          </table>
-        </div>
-      </div>
+      </form>
     </div>
 
     <!-- Modal -->
@@ -124,7 +155,6 @@
             </form>
           </div>
           <div class="modal-footer">
-            </button>
             <button type="button" class="btn btn-primary" id="saveChanges">
               Guardar Cambios
             </button>
@@ -254,38 +284,43 @@
               person.dni.includes(filterDNI)
             ) {
               list.append(`
-                            <tr>
-                                <td>${person.apellido} ${person.nombre}</td>
-                                <td>${person.dni}</td>
-                                <td>${person.telefono}</td>
-                                <td>${person.direccion}</td>
-                                <td class="text-center align-middle">
-                                    <button class="btn btn-primary edit-btn" data-id="${person.id}">Editar</button>
-                                    <button class="btn btn-danger delete-btn" data-id="${person.id}">Eliminar</button>
-                                </td>
-                            </tr>
-                        `);
-            }
-          });
-
-          // Detectar enter en los campos de búsqueda
-          $("#searchName").keypress(function (event) {
-            if (event.keyCode === 13) {
-              $("#searchBtn").click();
-            }
-          });
-
-          $("#searchDNI").keypress(function (event) {
-            if (event.keyCode === 13) {
-              $("#searchBtn").click();
+                    <tr>
+                        <td>${person.apellido} ${person.nombre}</td>
+                        <td>${person.dni}</td>
+                        <td>${person.telefono}</td>
+                        <td>${person.direccion}</td>
+                        <td class="text-center align-middle">
+                            <button class="btn btn-primary edit-btn" data-id="${person.id}">Editar</button>
+                            <button class="btn btn-danger delete-btn" data-id="${person.id}">Eliminar</button>
+                        </td>
+                    </tr>
+                `);
             }
           });
         }
 
-        $("#searchBtn").click(function () {
+        function handleSearch() {
           const filterName = $("#searchName").val();
           const filterDNI = $("#searchDNI").val();
           renderList(filterName, filterDNI);
+        }
+
+        $("#searchName").keypress(function (event) {
+          if (event.keyCode === 13) {
+            event.preventDefault();
+            handleSearch();
+          }
+        });
+
+        $("#searchDNI").keypress(function (event) {
+          if (event.keyCode === 13) {
+            event.preventDefault();
+            handleSearch();
+          }
+        });
+
+        $("#searchBtn").click(function () {
+          handleSearch();
         });
 
         $("#clearFiltersBtn").click(function () {
@@ -295,8 +330,9 @@
         });
 
         $(document).on("click", ".edit-btn", function () {
+          event.preventDefault();
           const id = $(this).data("id");
-          const person = people.find((p) => p.id === id);
+          const person = people.find((p) => p.id == id);
           if (person) {
             $("#editId").val(person.id);
             $("#editApellido").val(person.apellido);
@@ -310,6 +346,7 @@
         });
 
         $("#saveChanges").click(function () {
+          event.preventDefault();
           const id = $("#editId").val();
           const person = people.find((p) => p.id == id);
           if (person) {
@@ -340,7 +377,6 @@
             telefono: $("#addTelefono").val(),
             direccion: $("#addDireccion").val(),
           };
-          console.log("Adding new client:", newPerson);
           people.push(newPerson);
           $("#addModal").modal("hide");
           renderList();
