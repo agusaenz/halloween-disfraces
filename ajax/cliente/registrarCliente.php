@@ -1,6 +1,5 @@
 <?php
 
-$message = "##################\n";
 require_once ('../../aut_config.inc.php');
 
 try {
