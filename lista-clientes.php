@@ -73,8 +73,7 @@
           </button>
         </div>
         <div class="col-md-3">
-          <button type="button" class="btn btn-success btn-lg-custom" id="addClientBtn" data-bs-toggle="modal"
-            data-bs-target="#addModal">
+          <button type="button" class="btn btn-success btn-lg-custom" id="addClientBtn" data-bs-toggle="modal" data-bs-target="#addModal">
             Agregar Cliente
           </button>
         </div>
@@ -201,7 +200,9 @@
 
       let datos = {};
       if (filtroDNI) {
-        datos = { "filtroDNI": filtroDNI };
+        datos = {
+          "filtroDNI": filtroDNI
+        };
       }
 
       tabla = $('#client-table').DataTable({
@@ -209,7 +210,7 @@
           url: 'ajax/cliente/generarListaClientes.php',
           type: 'POST',
           data: datos,
-          error: function (xhr, error, thrown) {
+          error: function(xhr, error, thrown) {
             alert("Error en la operación.");
           }
         },
@@ -235,14 +236,21 @@
         },
         searching: false,
         autoWidth: false,
-        columns: [
-          { width: "25%" },
-          { width: "10%" },
-          { width: "13%" },
-          { width: "30%" },
+        columns: [{
+            width: "25%"
+          },
+          {
+            width: "10%"
+          },
+          {
+            width: "13%"
+          },
+          {
+            width: "30%"
+          },
           {
             width: "22%",
-            createdCell: function (td, cellData, rowData, row, col) {
+            createdCell: function(td, cellData, rowData, row, col) {
               $(td).addClass('text-center');
               
             }
@@ -276,7 +284,7 @@
         url: 'ajax/cliente/registrarCliente.php',
         data: datos,
         dataType: 'json',
-        success: function (data) {
+        success: function(data) {
           if (data.estado == 1) {
             alert('Cliente registrado correctamente.');
             $('#addModal').modal('hide');
@@ -285,7 +293,7 @@
             alert("Ha ocurrido un durante la operación.");
           }
         },
-        error: function () {
+        error: function() {
           alert("Ha ocurrido un durante la operación.");
         }
       });
@@ -325,7 +333,7 @@
         url: 'ajax/cliente/registrarCliente.php',
         data: datos,
         dataType: 'json',
-        success: function (data) {
+        success: function(data) {
           if (data.estado == 1) {
             $('#searchDNI').val(dni);
             generarTablaClientes();
@@ -336,7 +344,7 @@
             alert("Ha ocurrido un durante la operación.");
           }
         },
-        error: function () {
+        error: function() {
           alert("Ha ocurrido un durante la operación.");
         }
       });
@@ -353,7 +361,7 @@
           url: 'ajax/cliente/borrarCliente.php',
           data: datos,
           dataType: 'json',
-          success: function (data) {
+          success: function(data) {
             if (data.estado == 1) {
               alert('Cliente borrado correctamente.');
               borrarFiltros();
@@ -361,7 +369,7 @@
               alert("Ha ocurrido un durante la operación.");
             }
           },
-          error: function () {
+          error: function() {
             alert("Ha ocurrido un durante la operación.");
           }
         });
@@ -369,7 +377,7 @@
     }
 
 
-    $(document).ready(function () {
+    $(document).ready(function() {
       $('input[type="text"]').val('');
       generarTablaClientes();
 
