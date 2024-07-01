@@ -10,10 +10,12 @@ try {
     die();
 }
 
+$dni = isset($_POST["filtroDNI"]) ? filter_input(INPUT_POST, 'filtroDNI', FILTER_SANITIZE_NUMBER_INT) : "";
+
 try {
     $param = [];
     if (isset($_POST['filtroDNI'])) {
-        $dni = trim($_POST['filtroDNI']);
+        $dni = trim($dni);
 
         $sqlGet = "SELECT * FROM clientes WHERE numero_documento = :dni AND activo = 1";
         $param['dni'] = $dni;
