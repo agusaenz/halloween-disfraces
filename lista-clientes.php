@@ -23,6 +23,11 @@
       margin: 0;
     }
 
+    .container {
+      max-height: 100vh;
+      overflow-y: auto;
+    }
+
     .custom-form {
       background: white;
       padding: 15px;
@@ -33,7 +38,8 @@
       min-height: 400px;
       width: 100%;
       max-width: 1300px;
-      max-height: 900px;
+      max-height: 90vh;
+      overflow-y: auto;
     }
 
     .btn-lg-custom {
@@ -45,11 +51,25 @@
       margin-left: -15px;
     }
 
+    .modal-body {
+      max-height: 70vh;
+      overflow-y: auto;
+    }
+
     @media (max-width: 768px) {
       .btn-lg-custom {
         width: 100%;
         margin-top: 10px;
       }
+    }
+
+    .form-group label {
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+    
+    .modal-body .form-group {
+      margin-bottom: 20px;
     }
   </style>
 </head>
@@ -183,6 +203,7 @@
           <button type="button" class="btn btn-primary" id="addClient" onclick="agregarCliente()">
             Agregar Cliente
           </button>
+           <button type="button" class="btn btn-success" id="rentalBtn" onclick="hacerAlquiler()" style="display:none;">Hacer Alquiler</button>
         </div>
       </div>
     </div>
@@ -287,7 +308,8 @@
         success: function(data) {
           if (data.estado == 1) {
             alert('Cliente registrado correctamente.');
-            $('#addModal').modal('hide');
+             $('#rentalBtn').show();
+             $('#addClient').prop('disabled', true);
             borrarFiltros();
           } else if (data.estado == 2) {
             alert("Ha ocurrido un durante la operación.");
@@ -387,7 +409,18 @@
           generarTablaClientes();
         }
       });
+
+      $('#addModal').on('show.bs.modal', function () {
+  resetAddForm();
+  $('#rentalBtn').hide();
+  $('#addClient').prop('disabled', false);
+});
+
     });
+
+    function resetAddForm() {
+  $('#addForm').trigger('reset');
+}
   </script>
 </body>
 
