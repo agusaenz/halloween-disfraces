@@ -132,7 +132,7 @@
 <div class="container">
   <form class="custom-form" id="resizable-form">
     <div class="horizontal-group mb-4">
-      <div class="col-md-8 form-group">
+      <div class="col-md-8 form-group" id="form-group">
         <label class="form-label" for="documento"><i class="bi bi-file-earmark-text"></i> Documento</label>
         <section class="custom-br-text">  </section> 
         <div class="align-center">
@@ -303,9 +303,9 @@
     rentalYear.value = today.getFullYear();
 
     // Deshabilitar los campos de fecha de alquiler
-    rentalDay.disabled = true;
-    rentalMonth.disabled = true;
-    rentalYear.disabled = true;
+    rentalDay.disabled = false;
+    rentalMonth.disabled = false;
+    rentalYear.disabled = false;
 
     // Agregar nuevo disfraz
     addArticleBtn.addEventListener('click', () => {
