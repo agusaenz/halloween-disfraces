@@ -5,18 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Halloween Disfraces</title>
   
-    <!-- librerias -->
-    <!-- bootstrap -->
-    <link rel="stylesheet" href="assets/includes/css/bootstrap.min.css">
-    <script defer src="assets/includes/js/bootstrap.bundle.min.js"></script>
-    <!-- jquery -->
-    <script src="assets/includes/js/jquery-3.7.1.min.js"></script>
+  <!-- librerias -->
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="assets/includes/css/bootstrap.min.css">
+  <script defer src="assets/includes/js/bootstrap.bundle.min.js"></script>
+  <!-- jquery -->
+  <script src="assets/includes/js/jquery-3.7.1.min.js"></script>
 
-
-   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-
-
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
   <style>
     body {
       display: flex;
@@ -27,35 +25,38 @@
       font-family: 'Roboto', sans-serif;
       font-size: 0.9rem;
       margin: 0;
+      overflow: hidden; /* Evita el scrolling de la página */
     }
-	
+    
     .container {
-      width: 90%;
-      height: 90%;
+      width: 100%;
+      height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
+      overflow: hidden; /* Evita el scrolling del contenedor */
     }
+    
     .custom-form {
       background: white;
       padding: 15px;
       border-radius: 10px;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-      overflow: auto;
-      min-width: 300px;
-      min-height: 400px;
-      width: 100%;
-      max-width: 1300px;
-      max-height: 900px;
+      width: 40vw; /* Ajusta al 90% del ancho de la ventana */
+      height: 70vh; /* Ajusta al 90% de la altura de la ventana */
+      overflow: auto; /* Permite el scrolling interno si es necesario */
     }
+
     .form-label {
       font-weight: 500;
       margin-bottom: 5px;
     }
+
     .form-group {
       margin-bottom: 20px;
       width: 100%;
     }
+
     .form-control {
       width: 100%;
       box-sizing: border-box;
@@ -64,13 +65,15 @@
       border: 1px solid #ced4da;
       transition: box-shadow 0.3s ease, border-color 0.3s ease;
     }
+
     .form-control[disabled] {
-      background-color: #f2f2f2; /* Color de fondo gris claro */
-      cursor: not-allowed; /* Cursor no permitido */
+      background-color: #f2f2f2;
+      cursor: not-allowed;
     }
+
     .form-control.disabled-input {
-      background-color: #f2f2f2; /* Color de fondo gris claro */
-      cursor: not-allowed; /* Cursor no permitido */
+      background-color: #ffffff;
+
     }
 
     .btn-custom {
@@ -83,18 +86,22 @@
       font-size: 0.8rem;
       transition: background-color 0.3s ease;
     }
+
     .btn-custom:hover {
       background-color: #a2caf0;
     }
+
     .horizontal-group {
       display: flex;
       gap: 15px;
     }
+
     .date-group {
       display: flex;
       gap: 5px;
       align-items: center;
     }
+
     .align-center {
       display: flex;
       align-items: center;
@@ -113,6 +120,12 @@
       width: 100%;
       background-color: transparent;
     }
+
+    .article-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
   </style>
 </head>
 <body>
@@ -130,64 +143,65 @@
       </div>
     </div>
 
-    <div class="horizontal-group mb-4">
+    <div class="row mb-4">
       <div class="col-md-6 form-group">
         <label class="form-label" for="nombre"><i class="bi bi-person-circle"></i> Nombre y apellido</label>
-        <section class="custom-br-text">  </section> 
-         <input type="text" id="nombre" class="form-control" value="Juan Perez" />
+        <section class="custom-br-text"></section>
+        <input type="text" id="nombre" class="form-control disabled-input" value="Juan Perez" disabled />
       </div>
       <div class="col-md-6 form-group">
         <label class="form-label" for="correo"><i class="bi bi-envelope"></i> Correo</label>
-        <section class="custom-br-text">  </section> 
-        <input type="email" id="correo" class="form-control" value="Juanperez@gmail.com" />
+        <section class="custom-br-text"></section>
+        <input type="email" id="correo" class="form-control disabled-input" value="Juanperez@gmail.com" disabled />
       </div>
     </div>
 
-    <div class="horizontal-group mb-4">
+    <div class="row mb-4">
       <div class="col-md-6 form-group">
         <label class="form-label" for="celular"><i class="bi bi-telephone"></i> Celular</label>
-        <section class="custom-br-text">  </section> 
-         <input type="email" id="celular" class="form-control" value="Juanperez@gmail.com" />
+        <section class="custom-br-text"></section>
+        <input type="text" id="celular" class="form-control disabled-input" value="987654321" disabled />
       </div>
       <div class="col-md-6 form-group">
         <label class="form-label" for="direccion"><i class="bi bi-geo-alt"></i> Direccion</label>
-        <section class="custom-br-text">  </section> 
-         <input type="text" id="direccion" class="form-control" value="Casa Juan 158" />
+        <section class="custom-br-text"></section>
+        <input type="text" id="direccion" class="form-control disabled-input" value="Casa Juan 158" disabled />
       </div>
     </div>
 
     <div class="form-check form-switch">
       <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-      <label class="form-check-label" for="flexSwitchCheckDefault"> Cliente nuevo</label>
+      <label class="form-check-label" for="flexSwitchCheckDefault"> Alquiler rapido</label>
     </div>
     
     <hr class="my-4"> 
     <section class="custom-br-divider">  </section>  <!-- Implementación de la clase custom-br -->
-	  
+    
     <div class="form-group mb-4">
-      <label class="form-label"><i class="bi bi-list"></i> Disfraz </label>
-		<section class="custom-br-text">  </section> 
-		<div id="articles-section">
-        <div class="form-group">
-          <input type="text" name="articulo[]" class="form-control mb-2" placeholder="Artículo 1" />
+      <label class="form-label"><i class="bi bi-list"></i> Disfraces </label>
+      <section class="custom-br-text">  </section> 
+      <div id="articles-section">
+        <div class="form-group article-group">
+          <input type="text" name="articulo[]" class="form-control mb-2" placeholder="Disfraz 1" />
+          <button type="button" class="btn btn-danger btn-sm remove-article-btn"><i class="bi bi-trash"></i></button>
         </div>
       </div>
-      <button type="button" class="btn btn-custom mb-4" id="add-article-btn"><i class="bi bi-plus-circle"></i> Agregar Artículo&nbsp;</button>
+      <button type="button" class="btn btn-custom mb-4" id="add-article-btn"><i class="bi bi-plus-circle"></i> Agregar disfraz&nbsp;</button>
     </div>
-	  
-    <div class="horizontal-group mb-4">
-      <div class="form-group col-md-6">
+    
+    <div class="row mb-4">
+      <div class="col-md-6 form-group">
         <label class="form-label"><i class="bi bi-calendar"></i> Fecha de alquiler</label>
-        <section class="custom-br-text">  </section> 
+        <section class="custom-br-text"></section>
         <div class="date-group">
           <input type="text" id="rentalDay" class="form-control" placeholder="DD" disabled>
           <input type="text" id="rentalMonth" class="form-control" placeholder="MM" disabled>
           <input type="text" id="rentalYear" class="form-control" placeholder="YYYY" disabled>
         </div>
       </div>
-      <div class="form-group col-md-6">
+      <div class="col-md-6 form-group">
         <label class="form-label"><i class="bi bi-calendar"></i> Fecha de devolución</label>
-        <section class="custom-br-text">  </section> 
+        <section class="custom-br-text"></section>
         <div class="date-group">
           <input type="text" id="returnDay" class="form-control" placeholder="DD">
           <input type="text" id="returnMonth" class="form-control" placeholder="MM">
@@ -196,22 +210,23 @@
       </div>
     </div>
 
-    <div class="horizontal-group mb-4">
-      <div class="form-group mb-4">
+    <div class="row mb-4">
+      <div class="form-group mb-4 col-md-6">
         <label class="form-label" for="total"><i class="bi bi-currency-dollar"></i> Total</label>
-        <section class="custom-br-text">  </section> 
+        <section class="custom-br-text"></section>
         <input type="text" id="total" class="form-control" />
       </div>
 
-      <div class="form-group mb-4">
+      <div class="form-group mb-4 col-md-6">
         <label class="form-label" for="deposito"><i class="bi bi-bank"></i> Deposito</label>
-        <section class="custom-br-text">  </section> 
+        <section class="custom-br-text"></section>
         <input type="text" id="deposito" class="form-control" />
       </div>
     </div>
+
     <div class="form-group mb-4">
       <label class="form-label" for="formaPago"><i class="bi bi-credit-card-2-front"></i> Forma de pago</label>
-      <section class="custom-br-text">  </section> 
+      <section class="custom-br-text"></section>
       <select class="form-control" id="formaPago">
         <option value="credit-card">Tarjeta de crédito</option>
         <option value="debit-card">Tarjeta de débito</option>
@@ -222,7 +237,7 @@
 
     <div class="form-group">
       <label class="form-label" for="detalle"><i class="bi bi-pencil-square"></i> Detalle</label>
-      <section class="custom-br-text">  </section> 
+      <section class="custom-br-text"></section>
       <textarea class="form-control" id="detalle" rows="4"></textarea>
     </div>
 
@@ -230,60 +245,97 @@
   </form>
 </div>
 
-
 <script>
-  document.querySelectorAll('.form-control').forEach(input => {
-    input.addEventListener('keydown', function(event) {
-      if (event.key === 'Enter' && input.tagName.toLowerCase() !== 'textarea') {
-        event.preventDefault();
-      }
-    });
-  });
-
-  document.getElementById('add-article-btn').addEventListener('click', function() {
+  document.addEventListener('DOMContentLoaded', () => {
+    const flexSwitchCheckDefault = document.getElementById('flexSwitchCheckDefault');
+    const nombre = document.getElementById('nombre');
+    const correo = document.getElementById('correo');
+    const celular = document.getElementById('celular');
+    const direccion = document.getElementById('direccion');
+    const rentalDay = document.getElementById('rentalDay');
+    const rentalMonth = document.getElementById('rentalMonth');
+    const rentalYear = document.getElementById('rentalYear');
+    const returnDay = document.getElementById('returnDay');
+    const returnMonth = document.getElementById('returnMonth');
+    const returnYear = document.getElementById('returnYear');
+    const documentoInput = document.getElementById('documentoInput');
     const articlesSection = document.getElementById('articles-section');
-    const articleCount = articlesSection.querySelectorAll('.form-control').length + 1;
-    const newArticle = document.createElement('div');
-    newArticle.classList.add('form-group');
-    newArticle.innerHTML = `<input type="text" name="articulo[]" class="form-control mb-2" placeholder="Artículo ${articleCount}" />`;
-    articlesSection.appendChild(newArticle);
-  });
+    const addArticleBtn = document.getElementById('add-article-btn');
 
-  // Function to set initial state based on checkbox state
-  function setInitialInputState() {
-    const checkbox = document.getElementById('flexSwitchCheckDefault');
-    const isChecked = checkbox.checked;
-    const inputsToDisable = document.querySelectorAll('#documentoInput, #nombre, #correo, #celular, #direccion');
-    
-    inputsToDisable.forEach(input => {
-      input.disabled = !isChecked;
-      if (!isChecked) {
-        input.classList.add('disabled-input');
+    function updateArticlePlaceholders() {
+      const articleInputs = articlesSection.querySelectorAll('input[name="articulo[]"]');
+      articleInputs.forEach((input, index) => {
+        input.placeholder = `Disfraz ${index + 1}`;
+      });
+    }
+
+    flexSwitchCheckDefault.addEventListener('change', () => {
+      if (flexSwitchCheckDefault.checked) {
+        nombre.value = '';
+        correo.value = '';
+        celular.value = '';
+        direccion.value = '';
+        documentoInput.value = '';
+
+        nombre.disabled = false;
+        correo.disabled = false;
+        celular.disabled = false;
+        direccion.disabled = false;
+        documentoInput.disabled = true;
       } else {
-        input.classList.remove('disabled-input');
+        nombre.value = 'Juan Perez';
+        correo.value = 'Juanperez@gmail.com';
+        celular.value = '987654321';
+        direccion.value = 'Casa Juan 158';
+        documentoInput.value = '43295671';
+        nombre.disabled = true;
+        correo.disabled = true;
+        celular.disabled = true;
+        direccion.disabled = true;
+        documentoInput.disabled = false;
       }
     });
-  }
 
-  document.addEventListener('DOMContentLoaded', function() {
-    // Set initial input state when the page loads
-    setInitialInputState();
-
-    // Populate current date for rental day
+    // Asignar la fecha actual a los campos de fecha de alquiler
     const today = new Date();
-    const day = String(today.getDate()).padStart(2, '0');
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const year = today.getFullYear();
-    document.getElementById('rentalDay').value = day;
-    document.getElementById('rentalMonth').value = month;
-    document.getElementById('rentalYear').value = year;
+    rentalDay.value = today.getDate().toString().padStart(2, '0'); // Agrega un cero inicial si es necesario
+    rentalMonth.value = (today.getMonth() + 1).toString().padStart(2, '0'); // Los meses son 0-11
+    rentalYear.value = today.getFullYear();
 
-    // Listen for change event on the checkbox
-    document.getElementById('flexSwitchCheckDefault').addEventListener('change', function() {
-      setInitialInputState(); // Update input state whenever the checkbox changes
+    // Deshabilitar los campos de fecha de alquiler
+    rentalDay.disabled = true;
+    rentalMonth.disabled = true;
+    rentalYear.disabled = true;
+
+    // Agregar nuevo disfraz
+    addArticleBtn.addEventListener('click', () => {
+      const articleGroup = document.createElement('div');
+      articleGroup.classList.add('form-group', 'article-group');
+      articleGroup.innerHTML = `
+        <input type="text" name="articulo[]" class="form-control mb-2" placeholder="Disfraz" />
+        <button type="button" class="btn btn-danger btn-sm remove-article-btn"><i class="bi bi-trash"></i></button>
+      `;
+      articlesSection.appendChild(articleGroup);
+      updateArticlePlaceholders();
+
+      // Agregar evento para el nuevo botón de eliminación
+      articleGroup.querySelector('.remove-article-btn').addEventListener('click', (e) => {
+        e.currentTarget.closest('.article-group').remove();
+        updateArticlePlaceholders();
+      });
     });
+
+    // Agregar evento de eliminación a los botones existentes
+    document.querySelectorAll('.remove-article-btn').forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.currentTarget.closest('.article-group').remove();
+        updateArticlePlaceholders();
+      });
+    });
+
+    updateArticlePlaceholders();
   });
 </script>
+
 </body>
 </html>
-
