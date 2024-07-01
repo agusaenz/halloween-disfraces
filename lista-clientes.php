@@ -72,7 +72,7 @@
             Borrar Filtros
           </button>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 ms-auto">
           <button type="button" class="btn btn-success btn-lg-custom" id="addClientBtn" data-bs-toggle="modal" data-bs-target="#addModal">
             Agregar Cliente
           </button>
