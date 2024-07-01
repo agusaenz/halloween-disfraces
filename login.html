@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Halloween Disfraces</title>
+  
+  <!-- librerias -->
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="assets/includes/css/bootstrap.min.css">
+  <script defer src="assets/includes/js/bootstrap.bundle.min.js"></script>
+  <!-- jquery -->
+  <script src="assets/includes/js/jquery-3.7.1.min.js"></script>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+        body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #b39b9b;
+      font-family: 'Roboto', sans-serif;
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    .container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .custom-card-2 {
+    position: relative;
+    width: 300px;
+    padding: 20px;
+    background-color: #f8f8f8;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+    }
+
+    .custom-card-2 img {
+        max-width: 200px;
+        height: auto;
+    }
+
+    .custom-card-2 a {
+    display: block;
+    margin-bottom: 20px;
+    font-size: 20px;
+    text-decoration: none;
+    color: #333;
+    }
+
+    .login-content {
+    text-align: left;
+    }
+
+    .login-content form {
+    display: flex;
+    flex-direction: column;
+    }
+
+    .login-content label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    }
+
+    .login-content input {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    }
+
+    .login-content button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    }
+
+    .login-content button:hover {
+    background-color: #0056b3;
+    }
+
+
+
+    .login-content button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    }
+    .forgot-password {
+  margin-top: 10px;
+  text-align: center;
+    }
+
+    .forgot-password a {
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+    }
+
+    .forgot-password a:hover {
+    text-decoration: underline;
+    }
+
+
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="custom-card-2">
+        <img src="Halloween-Logo.png" alt="Icono de Login">
+        <br> </br>
+        <a href="#">Iniciar Sesión</a>
+        <div class="login-content">
+          <form action="/login" method="post">
+            <label for="username">Usuario:</label>
+            <input type="text" id="username" name="username" required>
+            
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="password" required>
+            
+
+            
+            <button type="submit">Iniciar Sesión</button>
+
+            <br> </br>
+            <div class="forgot-password">
+                <a href="#">¿Olvidaste tu contraseña?</a>
+              </div>
+          </form>
+        </div>
+      </div>
+      
+
+  </div>
+
+  <script>
+
+  </script>
+
+</body>
+</html>
