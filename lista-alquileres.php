@@ -22,6 +22,10 @@
       font-size: 0.9rem;
       margin: 0;
     }
+    .container {
+        max-height: 100vh;
+        overflow-y: auto;
+      }
 
     .custom-form {
       background: white;
@@ -33,9 +37,13 @@
       min-height: 400px;
       width: 100%;
       max-width: 1300px;
-      max-height: 900px;
+      max-height: 90vh;
     }
 
+    .modal-body {
+        max-height: 70vh;
+        overflow-y: auto;
+      }
     .btn-lg-custom {
       padding: 10px 20px;
       font-size: 1.25rem;
