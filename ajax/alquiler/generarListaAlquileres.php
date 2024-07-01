@@ -41,7 +41,7 @@ try {
             $fechaformatAlq = $fechaAlq->format('d / m / Y');
             $fechaDev = DateTime::createFromFormat('Y-m-d', $alquiler['fechaDevolucion']);
             $fechaformatDev = $fechaDev->format('d / m / Y');
-            $acciones = "<button class='btn btn-primary verAlquilerBtn'>Ver</button>
+            $acciones = "<button class='btn btn-primary verAlquilerBtn'>Ver / editar</button>
                          <button class='btn btn-danger eliminarAlquilerBtn ml-2' onclick='borrarAlquiler(event, {$alquiler['idAlquiler']})'>Eliminar</button>";
 
             $tabla[] = [
