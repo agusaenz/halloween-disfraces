@@ -21,12 +21,13 @@
       font-size: 0.9rem;
       margin: 0;
     }
-.container {
-  display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-        width: 100%;
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
       max-height: 100vh;
       overflow-y: auto;
     }
@@ -90,33 +91,21 @@
       </div>
 
       <div id="filtersSection" style="display: none">
-          <div class="row mb-3 align-items-center">
-            <div class="col-md-4 d-flex align-items-center">
-              <label for="fechaInicio" class="me-2">Desde:</label>
-              <input
-                type="date"
-                id="fechaInicio"
-                class="form-control"
-                placeholder="Fecha inicio"
-                lang="es"
-              />
-            </div>
-            <div class="col-md-4 d-flex align-items-center">
-              <label for="fechaFin" class="me-2">Hasta:</label>
-              <input
-                type="date"
-                id="fechaFin"
-                class="form-control"
-                placeholder="Fecha fin"
-                lang="es"
-              />
-            </div>
-            <div class="col-md-4">
-              <button type="button" class="btn btn-primary" id="filtrarBtn">
-                Buscar
-              </button>
-            </div>
+        <div class="row mb-3 align-items-center">
+          <div class="col-md-4 d-flex align-items-center">
+            <label for="fechaInicio" class="me-2">Desde:</label>
+            <input type="date" id="fechaInicio" class="form-control" placeholder="Fecha inicio" lang="es" />
           </div>
+          <div class="col-md-4 d-flex align-items-center">
+            <label for="fechaFin" class="me-2">Hasta:</label>
+            <input type="date" id="fechaFin" class="form-control" placeholder="Fecha fin" lang="es" />
+          </div>
+          <div class="col-md-4">
+            <button type="button" class="btn btn-primary" id="filtrarBtn" onclick="generarTablaMovimientos()">
+              Buscar
+            </button>
+          </div>
+        </div>
         <div class="row mb-3">
           <div class="col-md-12 text-right">
             <div class="total-section">
@@ -166,13 +155,9 @@
 
       let datos = {
         fechaInicio: fechaInicio,
-        fechaFin: fechaFin
+        fechaFin: fechaFin,
+        tipo: tipo
       };
-      if (tipo == "ingresos") {
-        datos.tipo = "total";
-      } else if (tipo == "depositos") {
-        datos.tipo = "deposito";
-      }
 
       if (tabla != undefined) tabla.destroy();
 
@@ -181,13 +166,13 @@
           url: "ajax/administracion.php",
           type: "POST",
           data: datos,
-          dataSrc: function(json) {
+          dataSrc: function (json) {
             $('#totalMonto').text("$" + json.total);
             console.log(json.total);
 
             return json.data;
           },
-          error: function(xhr, error, thrown) {
+          error: function (xhr, error, thrown) {
             alert("Error en la operación.");
           },
         },
@@ -213,30 +198,19 @@
         },
         searching: false,
         autoWidth: false,
-        order: [
-          [1]
-        ],
-        columns: [{
-            width: "20%",
-          },
-          {
-            width: "20%",
-          },
-          {
-            width: "20%",
-          },
-          {
-            width: "20%",
-          },
-          {
-            width: "20%",
-          }
+        order: [[1]],
+        columns: [
+          { width: "20%", },
+          { width: "20%", },
+          { width: "20%", },
+          { width: "20%", },
+          { width: "20%" }
         ],
       });
     }
 
-    $(document).ready(function() {
-      $("#ingresosBtn").click(function() {
+    $(document).ready(function () {
+      $("#ingresosBtn").click(function () {
         $("#ingresosBtn").addClass("active");
         $("#depositosBtn").removeClass("active");
         $("#filtersSection").show();
@@ -246,10 +220,10 @@
         $("#fechaInicio").val("");
         $("#fechaFin").val("");
         $("h1").text("Ingresos");
-        tipo = "ingresos";
+        tipo = "total";
       });
 
-      $("#depositosBtn").click(function() {
+      $("#depositosBtn").click(function () {
         $("#depositosBtn").addClass("active");
         $("#ingresosBtn").removeClass("active");
         $("#filtersSection").show();
@@ -259,7 +233,7 @@
         $("#fechaInicio").val("");
         $("#fechaFin").val("");
         $("h1").text("Depósitos");
-        tipo = "depositos";
+        tipo = "deposito";
       });
     });
 
