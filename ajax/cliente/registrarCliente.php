@@ -1,6 +1,6 @@
 <?php
 
-require_once ('../../aut_config.inc.php');
+require_once('../../aut_config.inc.php');
 
 try {
     $db = new PDO('mysql:host=' . $sql_host . ';dbname=' . $sql_db . ';charset=utf8mb4', $sql_usuario, $sql_pass);
@@ -34,23 +34,35 @@ $observacion = isset($_POST['correo']) ? filter_input(INPUT_POST, 'observacion',
 
 try {
     if ($_POST['accion'] == 'guardar') {
-        $sql = "INSERT INTO clientes (apellidos, nombres, numero_documento, telefono, domicilio, correo, observacion)
-        VALUES (:apellidos, :nombres, :numero_documento, :telefono, :domicilio, :correo, :observacion)";
+        $sqlCheck = "SELECT COUNT(*) FROM clientes WHERE numero_documento = :numero_documento AND activo = 1";
+        $stmtCheck = $db->prepare($sqlCheck);
+        $stmtCheck->execute([':numero_documento' => $numero_documento]);
+        $exists = $stmtCheck->fetchColumn();
 
-        $param = [
-            ":apellidos" => $apellidos,
-            ":nombres" => $nombres,
-            ":numero_documento" => $numero_documento,
-            ":telefono" => $telefono,
-            ":domicilio" => $domicilio,
-            ":correo" => $correo,
-            ":observacion" => $observacion
-        ];
+        if ($exists) {
+            $retorno['estado'] = 0;
+            $retorno['mensaje'] = "Ya existe un cliente con DNI " . $numero_documento;
+            echo json_encode($retorno);
+            die();
+        } else {
+            $sql = "INSERT INTO clientes (apellidos, nombres, numero_documento, telefono, domicilio, correo, observacion)
+                    VALUES (:apellidos, :nombres, :numero_documento, :telefono, :domicilio, :correo, :observacion)";
 
-        $stmtInsert = $db->prepare($sql);
-        $stmtInsert->execute($param);
-        $retorno['estado'] = 1;
-        echo json_encode($retorno);
+            $param = [
+                ":apellidos" => $apellidos,
+                ":nombres" => $nombres,
+                ":numero_documento" => $numero_documento,
+                ":telefono" => $telefono,
+                ":domicilio" => $domicilio,
+                ":correo" => $correo,
+                ":observacion" => $observacion
+            ];
+
+            $stmtInsert = $db->prepare($sql);
+            $stmtInsert->execute($param);
+            $retorno['estado'] = 1;
+            echo json_encode($retorno);
+        }
         die();
     } else if ($_POST['accion'] == 'editar') {
         $sql = "UPDATE clientes
@@ -74,8 +86,6 @@ try {
         echo json_encode($retorno);
         die();
     }
-
-
 } catch (PDOException $err) {
     // echo "Ocurrio un error durante la operación." . $err->getMessage();
     $retorno['estado'] = 2;
