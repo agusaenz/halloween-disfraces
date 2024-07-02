@@ -71,29 +71,21 @@
 
     .me-2 {
       margin-right: 0.5rem;
-      font-weight: bold;
     }
 
     .fecha-inputs {
-      display: none;
+      display: flex;
       margin-top: 10px;
       font-size: 1.1rem;
-    }
-
-    .form-switch .form-check-input {
-      width: 2.5em;
-      height: 1.5em;
-      margin-left: -2.5em;
-      transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
     }
   </style>
 </head>
 
 <body>
   <div class="container">
-    <form class="custom-form" id="resizable-form">
+    <form class="custom-form" id="resizable-form" onsubmit="return false;">
       <h1 class="text-center">Lista de Alquileres</h1>
-      <div class="row align-items-center">
+      <div class="row align-items-center justify-content-center">
         <div class="col-md-3">
           <input type="text" id="dniBusqueda" class="form-control" placeholder="Buscar por DNI..." />
         </div>
@@ -107,15 +99,9 @@
             Borrar Filtros
           </button>
         </div>
-        <div class="col-md-3 d-flex justify-content-end align-items-center">
-          <label class="me-2 filter-label">Filtrar por Fecha</label>
-          <div class="form-switch">
-            <input type="checkbox" id="filtrarFechaSwitch" class="form-check-input" />
-          </div>
-        </div>
       </div>
       <div class="row mt-3">
-        <div class="col-md-12 fecha-inputs" id="fechaInputs">
+        <div class="col-md-12 fecha-inputs" id="fechaInputs" style="display: flex;">
           <label class="me-2">Desde:</label>
           <input type="date" id="fechaInicio" class="form-control me-2" />
           <label class="me-2">Hasta:</label>
@@ -148,92 +134,91 @@
     var id__cliente = -1;
 
     function generarTablaAlquileres() {
-      let fechaInicio = $('#fechaInicio').val();
-      let fechaFin = $('#fechaFin').val();
-      let datos = {};
+  let fechaInicio = $('#fechaInicio').val();
+  let fechaFin = $('#fechaFin').val();
+  let datos = {};
 
-      if ((fechaInicio && !fechaFin) || (!fechaInicio && fechaFin)) {
-        alert("Debe proporcionar tanto la fecha de inicio como la fecha de fin.");
-        return;
-      }
-      if (fechaInicio && fechaFin) {
-        if (fechaInicio > fechaFin) {
-          alert("La fecha de inicio debe ser anterior a la fecha final.");
-          return;
-        }
-
-        datos.fechaInicio = fechaInicio;
-        datos.fechaFin = fechaFin;
-      }
-
-      let filtroDNI = $('#dniBusqueda').val();
-      let filtrarPorFecha = $('#filtrarFechaSwitch').is(':checked');
-
-      
-      if (filtroDNI) {
-        datos.filtroDNI = filtroDNI;
-      }
-
-      if (tabla != undefined) tabla.destroy();
-
-      tabla = $('#tabla-alquileres').DataTable({
-        ajax: {
-          url: 'ajax/alquiler/generarListaAlquileres.php',
-          type: 'POST',
-          data: datos,
-          error: function (xhr, error, thrown) {
-            alert("Error en la operación.");
-          }
-        },
-        language: {
-          emptyTable: "No hay datos para mostrar.",
-          info: "Mostrando _START_ a _END_ de _TOTAL_ alquileres",
-          infoEmpty: "Mostrando 0 a 0 de 0 alquileres",
-          infoFiltered: "(filtrando de un total de _MAX_ alquileres)",
-          zeroRecords: "No hay datos para mostrar.",
-          loadingRecords: "Cargando...",
-          lengthMenu: "Cargar _MENU_ alquileres",
-          search: "Buscar:",
-          paginate: {
-            first: "Primera",
-            last: "Última",
-            next: "Siguiente",
-            previous: "Anterior"
-          },
-          aria: {
-            sortAscending: ": activar para ordenar columna de manera ascendente",
-            sortDescending: ": activar para ordenar columna de manera descendente"
-          }
-        },
-        searching: false,
-        autoWidth: false,
-        order: [[2, "desc"]],
-        columns: [
-          { width: "25%" },
-          { width: "10%" },
-          { width: "10%" },
-          { width: "10%" },
-          { width: "10%" },
-          { width: "10%" },
-          {
-            width: "25%",
-            createdCell: function (td, cellData, rowData, row, col) {
-              $(td).addClass('text-center');
-            }
-          }
-        ]
-      });
+  if ((fechaInicio && !fechaFin) || (!fechaInicio && fechaFin)) {
+    alert("Debe proporcionar tanto la fecha de inicio como la fecha de fin.");
+    return;
+  }
+  if (fechaInicio && fechaFin) {
+    if (fechaInicio > fechaFin) {
+      alert("La fecha de inicio debe ser anterior a la fecha final.");
+      return;
     }
+
+    datos.fechaInicio = fechaInicio;
+    datos.fechaFin = fechaFin;
+  }
+
+  let filtroDNI = $('#dniBusqueda').val();
+  
+  if (filtroDNI) {
+    datos.filtroDNI = filtroDNI;
+  }
+
+  if (tabla != undefined) tabla.destroy();
+
+  tabla = $('#tabla-alquileres').DataTable({
+    ajax: {
+      url: 'ajax/alquiler/generarListaAlquileres.php',
+      type: 'POST',
+      data: datos,
+      error: function (xhr, error, thrown) {
+        alert("Error en la operación.");
+      }
+    },
+    language: {
+      emptyTable: "No hay datos para mostrar.",
+      info: "Mostrando _START_ a _END_ de _TOTAL_ alquileres",
+      infoEmpty: "Mostrando 0 a 0 de 0 alquileres",
+      infoFiltered: "(filtrando de un total de _MAX_ alquileres)",
+      zeroRecords: "No hay datos para mostrar.",
+      loadingRecords: "Cargando...",
+      lengthMenu: "Cargar _MENU_ alquileres",
+      search: "Buscar:",
+      paginate: {
+        first: "Primera",
+        last: "Última",
+        next: "Siguiente",
+        previous: "Anterior"
+      },
+      aria: {
+        sortAscending: ": activar para ordenar columna de manera ascendente",
+        sortDescending: ": activar para ordenar columna de manera descendente"
+      }
+    },
+    searching: false,
+    autoWidth: false,
+    order: [[2, "desc"]],
+    columns: [
+      { width: "25%" },
+      { width: "10%" },
+      { width: "10%" },
+      { width: "10%" },
+      { width: "10%" },
+      { width: "10%" },
+      {
+        width: "25%",
+        createdCell: function (td, cellData, rowData, row, col) {
+          $(td).addClass('text-center');
+        }
+      }
+    ]
+  });
+}
+
+
 
 
     function borrarFiltros() {
-      $('#dniBusqueda').val('');
-      $('#filtrarFechaSwitch').prop('checked', false);
-      $('#fechaInicio').val('');
-      $('#fechaFin').val('');
-      $('#fechaInputs').hide();
-      generarTablaAlquileres();
-    }
+  $('#dniBusqueda').val('');
+  $('#fechaInicio').val('');
+  $('#fechaFin').val('');
+  generarTablaAlquileres();
+}
+
 
     function borrarAlquiler(event, idAlquiler) {
       event.preventDefault();
@@ -262,26 +247,23 @@
       }
     }
 
-    $(document).ready(function () {
-      $('input[type="text"]').val('');
-      $('input[type="date"]').val('');
+  $(document).ready(function () {
+  $('input[type="text"]').val('');
+  $('input[type="date"]').val('');
+  generarTablaAlquileres();
+
+  $('#dniBusqueda, #fechaInicio, #fechaFin').on('keypress', function (e) {
+    if (e.which == 13) {
+      e.preventDefault();
       generarTablaAlquileres();
+    }
+  });
 
-      $('#dniBusqueda').on('keypress', function (e) {
-        if (e.which == 13) {
-          e.preventDefault();
-          generarTablaAlquileres();
-        }
-      });
+  $('#buscarBtn').on('click', function () {
+    generarTablaAlquileres();
+  });
+});
 
-      $('#filtrarFechaSwitch').change(function () {
-        if ($(this).is(':checked')) {
-          $('#fechaInputs').show();
-        } else {
-          $('#fechaInputs').hide();
-        }
-      });
-    });
   </script>
 </body>
 
