@@ -18,16 +18,26 @@
         font-size: 0.9rem;
         margin: 0;
       }
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        max-height: 100vh;
+        overflow-y: auto;
+
+      }
       .custom-form {
         background: white;
-        padding: 15px;
+        padding: 20px;
         border-radius: 10px;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
         overflow: auto;
         min-width: 300px;
         width: 100%;
-        max-width: 1300px;
-        max-height: 900px;
+        max-width: 1100px;
+        max-height: 90vh;
         transition: border-color 0.3s ease;
       }
       .btn-lg-custom {
@@ -51,6 +61,11 @@
         font-weight: bold;
         text-align: right;
       }
+      .btn-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
     </style>
   </head>
 
@@ -58,8 +73,9 @@
     <div class="container">
       <form class="custom-form" id="resizable-form">
         <h1 class="text-center">Administración</h1>
-        <div class="row mb-4">
-          <div class="col-md-6">
+        <h5 class="text-center">Seleccione una opción:</h5>
+        <div class="btn-container">
+          <div class="col-md-5 me-3">
             <button
               type="button"
               class="btn btn-primary btn-lg-custom"
@@ -68,7 +84,7 @@
               Ingresos
             </button>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-5">
             <button
               type="button"
               class="btn btn-primary btn-lg-custom"
@@ -80,8 +96,9 @@
         </div>
 
         <div id="filtersSection" style="display: none">
-          <div class="row mb-3">
-            <div class="col-md-4">
+          <div class="row mb-3 align-items-center">
+            <div class="col-md-4 d-flex align-items-center">
+              <label for="fechaInicio" class="me-2">Desde:</label>
               <input
                 type="date"
                 id="fechaInicio"
@@ -90,7 +107,8 @@
                 lang="es"
               />
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 d-flex align-items-center">
+              <label for="fechaFin" class="me-2">Hasta:</label>
               <input
                 type="date"
                 id="fechaFin"
