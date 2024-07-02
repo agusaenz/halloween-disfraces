@@ -22,10 +22,11 @@
       font-size: 0.9rem;
       margin: 0;
     }
+
     .container {
-        max-height: 100vh;
-        overflow-y: auto;
-      }
+      max-height: 100vh;
+      overflow-y: auto;
+    }
 
     .custom-form {
       background: white;
@@ -41,9 +42,10 @@
     }
 
     .modal-body {
-        max-height: 70vh;
-        overflow-y: auto;
-      }
+      max-height: 70vh;
+      overflow-y: auto;
+    }
+
     .btn-lg-custom {
       padding: 10px 20px;
       font-size: 1.25rem;
@@ -55,6 +57,35 @@
         margin-top: 10px;
       }
     }
+
+  .filter-label {
+    font-size: 1.15rem;
+    margin-right: 10px; 
+    font-weight: bold;
+  }
+
+    .align-items-center {
+      display: flex;
+      align-items: center;
+    }
+
+    .me-2 {
+      margin-right: 0.5rem;
+      font-weight: bold;
+    }
+
+    .fecha-inputs {
+      display: none;
+      margin-top: 10px;
+      font-size: 1.1rem;
+    }
+
+    .form-switch .form-check-input {
+      width: 2.5em;
+      height: 1.5em;
+      margin-left: -2.5em;
+      transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+    }
   </style>
 </head>
 
@@ -62,7 +93,7 @@
   <div class="container">
     <form class="custom-form" id="resizable-form">
       <h1 class="text-center">Lista de Alquileres</h1>
-      <div class="row">
+      <div class="row align-items-center">
         <div class="col-md-3">
           <input type="text" id="dniBusqueda" class="form-control" placeholder="Buscar por DNI..." />
         </div>
@@ -75,6 +106,20 @@
           <button type="button" class="btn btn-secondary" id="borrarFiltrosBtn" onclick="borrarFiltros()">
             Borrar Filtros
           </button>
+        </div>
+        <div class="col-md-3 d-flex justify-content-end align-items-center">
+  <label class="me-2 filter-label">Filtrar por Fecha</label>
+  <div class="form-switch">
+    <input type="checkbox" id="filtrarFechaSwitch" class="form-check-input" />
+  </div>
+</div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-12 fecha-inputs" id="fechaInputs">
+          <label class="me-2">Desde:</label>
+          <input type="date" id="fechaInicio" class="form-control me-2" />
+          <label class="me-2">Hasta:</label>
+          <input type="date" id="fechaFin" class="form-control me-2" />
         </div>
       </div>
       <div class="row mt-3">
@@ -103,79 +148,78 @@
     var id__cliente = -1;
 
     function generarTablaAlquileres() {
-      if (tabla != undefined) tabla.destroy();
+  if (tabla != undefined) tabla.destroy();
 
-      let filtroDNI = $('#dniBusqueda').val();
+  let filtroDNI = $('#dniBusqueda').val();
+  let filtrarPorFecha = $('#filtrarFechaSwitch').is(':checked');
+  let fechaInicio = $('#fechaInicio').val();
+  let fechaFin = $('#fechaFin').val();
 
-      let datos = {};
-      if (filtroDNI) {
-        datos = {
-          "filtroDNI": filtroDNI
-        };
+  let datos = {};
+  if (filtroDNI) {
+    datos.filtroDNI = filtroDNI;
+  }
+  if (filtrarPorFecha && fechaInicio && fechaFin) {
+    datos.fechaInicio = fechaInicio;
+    datos.fechaFin = fechaFin;
+  }
+
+  tabla = $('#tabla-alquileres').DataTable({
+    ajax: {
+      url: 'ajax/alquiler/generarListaAlquileres.php',
+      type: 'POST',
+      data: datos,
+      error: function(xhr, error, thrown) {
+        alert("Error en la operación.");
       }
+    },
+    language: {
+      emptyTable: "No hay datos para mostrar.",
+      info: "Mostrando _START_ a _END_ de _TOTAL_ alquileres",
+      infoEmpty: "Mostrando 0 a 0 de 0 alquileres",
+      infoFiltered: "(filtrando de un total de _MAX_ alquileres)",
+      zeroRecords: "No hay datos para mostrar.",
+      loadingRecords: "Cargando...",
+      lengthMenu: "Cargar _MENU_ alquileres",
+      search: "Buscar:",
+      paginate: {
+        first: "Primera",
+        last: "Última",
+        next: "Siguiente",
+        previous: "Anterior"
+      },
+      aria: {
+        sortAscending: ": activar para ordenar columna de manera ascendente",
+        sortDescending: ": activar para ordenar columna de manera descendente"
+      }
+    },
+    searching: false,
+    autoWidth: false,
+    order: [[2, "desc"]], 
+    columns: [
+      { width: "25%" },
+      { width: "10%" },
+      { width: "10%" },
+      { width: "10%" },
+      { width: "10%" },
+      { width: "10%" },
+      {
+        width: "25%",
+        createdCell: function(td, cellData, rowData, row, col) {
+          $(td).addClass('text-center');
+        }
+      }
+    ]
+  });
+}
 
-      tabla = $('#tabla-alquileres').DataTable({
-        ajax: {
-          url: 'ajax/alquiler/generarListaAlquileres.php',
-          type: 'POST',
-          data: datos,
-          error: function(xhr, error, thrown) {
-            alert("Error en la operación.");
-          }
-        },
-        language: {
-          emptyTable: "No hay datos para mostrar.",
-          info: "Mostrando _START_ a _END_ de _TOTAL_ alquileres",
-          infoEmpty: "Mostrando 0 a 0 de 0 alquileres",
-          infoFiltered: "(filtrando de un total de _MAX_ alquileres)",
-          zeroRecords: "No hay datos para mostrar.",
-          loadingRecords: "Cargando...",
-          lengthMenu: "Cargar _MENU_ alquileres",
-          search: "Buscar:",
-          paginate: {
-            first: "Primera",
-            last: "Última",
-            next: "Siguiente",
-            previous: "Anterior"
-          },
-          aria: {
-            sortAscending: ": activar para ordenar columna de manera ascendete",
-            sortDescending: ": activar para ordenar columna de manera descendente"
-          }
-        },
-        searching: false,
-        autoWidth: false,
-        order: [[2]],
-        columns: [{
-            width: "25%"
-          },
-          {
-            width: "10%"
-          },
-          {
-            width: "10%"
-          },
-          {
-            width: "10%"
-          },
-          {
-            width: "10%"
-          },
-          {
-            width: "10%"
-          },
-          {
-            width: "25%",
-            createdCell: function(td, cellData, rowData, row, col) {
-              $(td).addClass('text-center');
-            }
-          }
-        ]
-      });
-    }
 
     function borrarFiltros() {
       $('#dniBusqueda').val('');
+      $('#filtrarFechaSwitch').prop('checked', false);
+      $('#fechaInicio').val('');
+      $('#fechaFin').val('');
+      $('#fechaInputs').hide();
       generarTablaAlquileres();
     }
 
@@ -214,6 +258,14 @@
         if (e.which == 13) {
           e.preventDefault();
           generarTablaAlquileres();
+        }
+      });
+
+      $('#filtrarFechaSwitch').change(function() {
+        if ($(this).is(':checked')) {
+          $('#fechaInputs').show();
+        } else {
+          $('#fechaInputs').hide();
         }
       });
     });
