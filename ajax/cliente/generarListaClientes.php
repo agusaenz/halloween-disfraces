@@ -44,12 +44,11 @@ try {
             ];
         }
         $data = ["data" => $tabla];
-        echo json_encode($data);
-        die();
     } else {
-        $data = ["data" => ["No hay clientes generados."]];
-        return $data;
+        $data = ["data" => [["No se encontraron clientes.", "", "", "", ""]]];
     }
+    echo json_encode($data);
+    die();
 } catch (PDOException $err) {
     echo "Ocurrio un error durante la operación." . $err->getMessage();
     die();

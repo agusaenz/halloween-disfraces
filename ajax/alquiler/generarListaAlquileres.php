@@ -1,6 +1,6 @@
 <?php
 
-require_once('../../aut_config.inc.php');
+require_once ('../../aut_config.inc.php');
 
 try {
     $db = new PDO('mysql:host=' . $sql_host . ';dbname=' . $sql_db . ';charset=utf8', $sql_usuario, $sql_pass);
@@ -10,32 +10,41 @@ try {
     die();
 }
 
-$dni = isset($_POST["filtroDNI"]) ? filter_input(INPUT_POST, 'filtroDNI', FILTER_SANITIZE_NUMBER_INT) : "";
+$dni = isset($_POST["filtroDNI"]) ? trim(filter_input(INPUT_POST, 'filtroDNI', FILTER_SANITIZE_NUMBER_INT)) : "";
 
 try {
     $param = [];
-    if (isset($_POST['filtroDNI'])) {
-        $dni = trim($dni);
+    $whereClauses = [];
 
-        $sqlGet = " SELECT a.*, c.apellidos, c.nombres, c.numero_documento FROM alquileres a
-                    JOIN clientes c ON a.idCliente = c.idCliente
-                    WHERE a.activo = 1 AND c.numero_documento = :dni
-                    ORDER BY a.fechaAlquiler DESC";
-        $param['dni'] = $dni;
-    } else {
-        $sqlGet = " SELECT a.*, c.apellidos, c.nombres, c.numero_documento FROM alquileres a
-                    JOIN clientes c ON a.idCliente = c.idCliente
-                    WHERE a.activo = 1
-                    ORDER BY a.fechaAlquiler DESC";
+    if (isset($_POST['filtroDNI'])) {
+        $whereClauses[] = "c.numero_documento = :dni";
+        $param['dni'] = $_POST['filtroDNI'];
     }
+
+    if (isset($_POST["fechaInicio"]) && isset($_POST["fechaFin"])) {
+        $whereClauses[] = "a.fechaAlquiler BETWEEN :fechaInicio AND :fechaFin";
+        $param['fechaInicio'] = $_POST["fechaInicio"];
+        $param['fechaFin'] = $_POST["fechaFin"];
+    }
+
+    $whereStr = "";
+    if (!empty($whereClauses)) {
+        $whereStr = " AND " . implode(" AND ", $whereClauses);
+    }
+
+    $sqlGet = "SELECT a.*, c.apellidos, c.nombres, c.numero_documento 
+               FROM alquileres a
+               JOIN clientes c ON a.idCliente = c.idCliente
+               WHERE a.activo = 1" . $whereStr . "
+               ORDER BY a.fechaAlquiler DESC";
 
     $stmt = $db->prepare($sqlGet);
     $stmt->execute($param);
 
     $alquileres = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    $tabla = [];
     if (count($alquileres) > 0) {
+        $tabla = [];
         foreach ($alquileres as $alquiler) {
             $fechaAlq = DateTime::createFromFormat('Y-m-d', $alquiler['fechaAlquiler']);
             $fechaformatAlq = $fechaAlq->format('d / m / Y');
@@ -43,9 +52,7 @@ try {
             $fechaformatDev = $fechaDev->format('d / m / Y');
             $acciones = "<button class='btn btn-primary verAlquilerBtn'>Ver / editar</button>
             <button class='btn btn-success verAlquilerBtn'>Imprimir</button>
-                         <button class='btn btn-danger eliminarAlquilerBtn ml-2' onclick='borrarAlquiler(event, {$alquiler['idAlquiler']})'>Eliminar</button>
-                         ";
-                        
+            <button class='btn btn-danger eliminarAlquilerBtn ml-2' onclick='borrarAlquiler(event, {$alquiler['idAlquiler']})'>Eliminar</button>";
 
             $tabla[] = [
                 $alquiler['apellidos'] . ' ' . $alquiler['nombres'],
@@ -58,13 +65,13 @@ try {
             ];
         }
         $data = ["data" => $tabla];
-        echo json_encode($data);
-        die();
     } else {
-        $data = ["data" => ["No hay clientes generados."]];
-        return $data;
+        $data = ["data" => [["No se encontraron alquileres.", "", "", "", "", "", ""]]];
     }
+    echo json_encode($data);
+    die();
 } catch (PDOException $err) {
     echo "Ocurrio un error durante la operación." . $err->getMessage();
     die();
 }
+
