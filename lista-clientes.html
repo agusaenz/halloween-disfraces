@@ -336,13 +336,13 @@
             $("#addClient").prop("disabled", true);
             borrarFiltros();
           } else if (data.estado == 2) {
-            alert("Ha ocurrido un durante la operación.");
+            alert("Ha ocurrido un error durante la operación.");
           } else if (data.estado == 0) {
             alert(data.mensaje);
           }
         },
         error: function () {
-          alert("Ha ocurrido un durante la operación.");
+          alert("Ha ocurrido un error durante la operación.");
         },
       });
     }
