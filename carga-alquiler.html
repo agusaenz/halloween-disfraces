@@ -13,160 +13,207 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-color: #b39b9b;
-      font-family: 'Roboto', sans-serif;
-      font-size: 0.9rem;
-      margin: 0;
-      overflow: hidden; /* Evita el scrolling de la página */
-    }
-    
-    .container {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden; /* Evita el scrolling del contenedor */
-    }
-    
-    .custom-form {
-      background: white;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-      width: 40vw; /* Ajusta al 90% del ancho de la ventana */
-      height: 70vh; /* Ajusta al 90% de la altura de la ventana */
-      overflow: auto; /* Permite el scrolling interno si es necesario */
-    }
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #b39b9b;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.9rem;
+  margin: 0;
+  overflow: hidden; /* Evita el scrolling de la página */
+}
 
-    .form-label {
-      font-weight: 500;
-      margin-bottom: 5px;
-    }
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Permite el scrolling si es necesario */
+}
 
-    .form-group {
-      margin-bottom: 20px;
-      width: 100%;
-    }
+.custom-form {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  width: 80vw;
+      /* Increased width */
+      height: 90vh;
+      /* Increased height */
+      overflow: auto;
+}
 
-    .form-control {
-      width: 100%;
-      box-sizing: border-box;
-      border-radius: 10px;
-      background-color: #ffffff;
-      padding: 10px;
-      border: 1px solid #ced4da;
-      transition: box-shadow 0.3s ease, border-color 0.3s ease;
-    }
+.form-label {
+  font-weight: 500;
+  margin-bottom: 5px;
+}
 
-    .form-control[disabled] {
-      background-color: #f2f2f2;
-      cursor: not-allowed;
-    }
+.form-group {
+  margin-bottom: 20px;
+  width: 100%;
+}
 
-    .form-control.disabled-input {
-      background-color: #f2f2f2;
-    }
+.form-control {
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 10px;
+  background-color: #ffffff;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
 
-    .form-control.custom-color {
-      background-color: #ffffff; /* Color personalizado cuando está activado */
-    }
+.form-control[disabled] {
+  background-color: #f2f2f2;
+  cursor: not-allowed;
+}
 
-    .btn-custom {
-      background-color: #267ecf;
-      color: white;
-      padding: 4px 14px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 0.8rem;
-      transition: background-color 0.3s ease;
-    }
+.form-control.disabled-input {
+  background-color: #f2f2f2;
+}
 
-    .btn-custom:hover {
-      background-color: #a2caf0;
-    }
+.form-control.custom-color {
+  background-color: #ffffff; /* Color personalizado cuando está activado */
+}
 
-    .horizontal-group {
-      display: flex;
-      gap: 15px;
-    }
+.btn-custom {
+  background-color: #267ecf;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: background-color 0.3s ease;
+}
 
-    .date-group {
-      display: flex;
-      gap: 5px;
-      align-items: center;
-    }
+.btn-custom:hover {
+  background-color: #a2caf0;
+}
 
-    .align-center {
-      display: flex;
-      align-items: center;
-    }
+.horizontal-group {
+  display: flex;
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan si no caben en una línea */
+  gap: 15px;
+}
 
-    .custom-br-divider {
-      display: block;
-      height: 10px;
-      width: 100%;
-      background-color: transparent;
-    }
+.date-group {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
 
-    .custom-br-text {
-      display: block;
-      height: 3px;
-      width: 100%;
-      background-color: transparent;
-    }
+.align-center {
+  display: flex;
+  align-items: center;
+}
 
-    .article-group {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+.custom-br-divider {
+  display: block;
+  height: 10px;
+  width: 100%;
+  background-color: transparent;
+}
+
+.custom-br-text {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background-color: transparent;
+}
+
+.article-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-print {
+  background-color: #28a745; /* Color verde para el botón de imprimir */
+  color: white;
+  padding: 4px 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: background-color 0.3s ease;
+}
+
+.btn-print:hover {
+  background-color: #218838; /* Color verde más oscuro para el hover */
+}
+
+.col-md-8 {
+  flex: 0 0 50%; /* Ajustar el tamaño de los campos al 48% del contenedor para dejar espacio entre ellos */
+}	  
+	  
+.col-md-6 {
+  flex: 0 0 45%; /* Ajustar el tamaño de los campos al 48% del contenedor para dejar espacio entre ellos */
+}
+
+.col-md-4 {
+  flex: 0 0 30%; /* Ajustar el tamaño de los campos al 48% del contenedor para dejar espacio entre ellos */
+}
+
+.row-centered {
+	  display: flex;
+	  justify-content: center;
+}
+	  
+@media (max-width: 768px) {
+  .col-md-6 {
+    flex: 0 0 100%; /* Para pantallas pequeñas, los campos ocuparán el 100% del ancho */
+  }
+}
   </style>
 </head>
 <body>
 <div class="container">
   <form class="custom-form" id="resizable-form">
-    <div class="horizontal-group mb-4">
-      <div class="col-md-8 form-group" id="form-group">
+    <div class="form-group col-md-6">
+      <div class="col-md-6" id="form-group">
         <label class="form-label" for="documento"><i class="bi bi-file-earmark-text"></i> Documento</label>
         <section class="custom-br-text">  </section> 
         <div class="align-center">
-          <input type="text" class="form-control" id="documentoInput" value="43295671" />
+          <input type="text"  id="documento"  class="form-control" value="43295671"  />
           <aside>&nbsp; &nbsp; &nbsp;</aside>
           <button type="button" class="btn btn-custom ms-2"><i class="bi bi-search"></i> Buscar</button>
         </div>
       </div>
     </div>
 
-    <div class="row mb-4">
-      <div class="col-md-6 form-group">
-        <label class="form-label" for="nombre"><i class="bi bi-person-circle"></i> Nombre y apellido</label>
-        <section class="custom-br-text"></section>
-        <input type="text" id="nombre" class="form-control disabled-input" value="Juan Perez" disabled />
-      </div>
-      <div class="col-md-6 form-group">
-        <label class="form-label" for="correo"><i class="bi bi-envelope"></i> Correo</label>
-        <section class="custom-br-text"></section>
-        <input type="email" id="correo" class="form-control disabled-input" value="Juanperez@gmail.com" disabled />
-      </div>
-    </div>
+<div class="row mb-4">
+  <div class="horizontal-group"> 
+  <div class="form-group col-md-6">
+    <label class="form-label" for="nombre"><i class="bi bi-person-circle"></i> Nombre y apellido</label>
+    <section class="custom-br-text"></section>
+    <input type="text" id="nombre" class="form-control disabled-input" value="Juan Perez" disabled />
+  </div>
+  <div class="form-group col-md-6">
+    <label class="form-label" for="correo"><i class="bi bi-envelope"></i> Correo</label>
+    <section class="custom-br-text"></section>
+    <input type="email" id="correo" class="form-control disabled-input" value="Juanperez@gmail.com" disabled />
+  </div>
+  </div>
+</div>
+
+    
 
     <div class="row mb-4">
-      <div class="col-md-6 form-group">
+      <div class="horizontal-group"> 
+      <div class="form-group col-md-6">
         <label class="form-label" for="celular"><i class="bi bi-telephone"></i> Celular</label>
         <section class="custom-br-text"></section>
         <input type="text" id="celular" class="form-control disabled-input" value="987654321" disabled />
       </div>
-      <div class="col-md-6 form-group">
-        <label class="form-label" for="direccion"><i class="bi bi-geo-alt"></i> Direccion</label>
+      <div class="form-group col-md-6">
+        <label class="form-label" for="direccion"><i class="bi bi-geo-alt"></i> Dirección</label>
         <section class="custom-br-text"></section>
         <input type="text" id="direccion" class="form-control disabled-input" value="Casa Juan 158" disabled />
+      </div>
       </div>
     </div>
 
@@ -183,179 +230,138 @@
       <section class="custom-br-text">  </section> 
       <div id="articles-section">
         <div class="form-group article-group">
-          <input type="text" name="articulo[]" class="form-control mb-2" placeholder="Disfraz 1" />
-          <button type="button" class="btn btn-danger btn-sm remove-article-btn"><i class="bi bi-trash"></i></button>
+          <input type="text" id="disfraz" class="form-control"  />
         </div>
       </div>
-      <button type="button" class="btn btn-custom mb-4" id="add-article-btn"><i class="bi bi-plus-circle"></i> Agregar disfraz&nbsp;</button>
     </div>
     
+	  
+
+	  
+	  
+	  
     <div class="row mb-4">
       <div class="col-md-6 form-group">
         <label class="form-label"><i class="bi bi-calendar"></i> Fecha de alquiler</label>
         <section class="custom-br-text"></section>
-        <div class="date-group">
-          <input type="text" id="rentalDay" class="form-control" placeholder="DD" disabled>
-          <input type="text" id="rentalMonth" class="form-control" placeholder="MM" disabled>
-          <input type="text" id="rentalYear" class="form-control" placeholder="YYYY" disabled>
-        </div>
+        
+          <input
+            type="date"
+            id="fechaFin"
+            class="form-control"
+            placeholder="Fecha fin"
+            lang="es"
+          />
+        
       </div>
       <div class="col-md-6 form-group">
         <label class="form-label"><i class="bi bi-calendar"></i> Fecha de devolución</label>
         <section class="custom-br-text"></section>
-        <div class="date-group">
-          <input type="text" id="returnDay" class="form-control" placeholder="DD">
-          <input type="text" id="returnMonth" class="form-control" placeholder="MM">
-          <input type="text" id="returnYear" class="form-control" placeholder="YYYY">
-        </div>
+        
+          <input
+            type="date"
+            id="fechaFin"
+            class="form-control"
+            placeholder="Fecha fin"
+            lang="es"
+          />
+       
       </div>
     </div>
 
-    <div class="row mb-4">
-      <div class="form-group mb-4 col-md-6">
-        <label class="form-label" for="total"><i class="bi bi-currency-dollar"></i> Total</label>
+<div class="row mb-4 ">
+	
+      <div class="col-md-4 form-group">      
+        <label class="form-label"><i class="bi bi-cash"></i> Total</label>
         <section class="custom-br-text"></section>
-        <input type="text" id="total" class="form-control" />
-      </div>
-
-      <div class="form-group mb-4 col-md-6">
-        <label class="form-label" for="deposito"><i class="bi bi-bank"></i> Deposito</label>
+        <input type="number" id="total" class="form-control" />
+	</div>
+	
+      <div class="col-md-4 form-group">
+        <label class="form-label"><i class="bi bi-cash"></i> Seña</label>
         <section class="custom-br-text"></section>
-        <input type="text" id="deposito" class="form-control" />
+        <input type="number" id="sena" class="form-control" />
       </div>
-    </div>
-
-    <div class="form-group mb-4">
-      <label class="form-label" for="formaPago"><i class="bi bi-credit-card-2-front"></i> Forma de pago</label>
-      <section class="custom-br-text"></section>
-      <select class="form-control" id="formaPago">
-        <option value="credit-card">Tarjeta de crédito</option>
-        <option value="debit-card">Tarjeta de débito</option>
-        <option value="paypal">Transferencia</option>
-        <option value="cash">Efectivo</option>
-      </select>
+		
+		
+	
+      <div class="col-md-4 form-group">
+        <label class="form-label"><i class="bi bi-credit-card"></i> Forma de pago</label>
+        <section class="custom-br-text"></section>
+        <select id="formaPago" class="form-control">
+          <option value="efectivo">Efectivo</option>
+          <option value="tarjeta">Tarjeta</option>
+          <option value="transferencia">Transferencia</option>
+        </select>
+      </div>
     </div>
 
     <div class="form-group">
       <label class="form-label" for="detalle"><i class="bi bi-pencil-square"></i> Detalle</label>
-      <section class="custom-br-text"></section>
+      
       <textarea class="form-control" id="detalle" rows="4"></textarea>
     </div>
-
-    <button type="submit" class="btn btn-custom btn-block mb-4">Agregar</button>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-between">
+      <div>
+        <button type="button" class="btn btn-custom me-md-2"><i class="bi bi-save"></i> Guardar</button>
+        <button type="button" class="btn btn-danger"><i class="bi bi-x-circle"></i> Cancelar</button>
+      </div>
+      <button type="button" class="btn btn-print"><i class="bi bi-printer"></i> Imprimir</button>
+    </div>
   </form>
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const flexSwitchCheckDefault = document.getElementById('flexSwitchCheckDefault');
-    const nombre = document.getElementById('nombre');
-    const correo = document.getElementById('correo');
-    const celular = document.getElementById('celular');
-    const direccion = document.getElementById('direccion');
-    const rentalDay = document.getElementById('rentalDay');
-    const rentalMonth = document.getElementById('rentalMonth');
-    const rentalYear = document.getElementById('rentalYear');
-    const returnDay = document.getElementById('returnDay');
-    const returnMonth = document.getElementById('returnMonth');
-    const returnYear = document.getElementById('returnYear');
-    const documentoInput = document.getElementById('documentoInput');
-    const articlesSection = document.getElementById('articles-section');
-    const addArticleBtn = document.getElementById('add-article-btn');
+$(document).ready(function() {
+  const documentoInput = $("#documento");
+  const nombreInput = $("#nombre");
+  const correoInput = $("#correo");
+  const celularInput = $("#celular");
+  const direccionInput = $("#direccion");
+  
 
-    function updateArticlePlaceholders() {
-      const articleInputs = articlesSection.querySelectorAll('input[name="articulo[]"]');
-      articleInputs.forEach((input, index) => {
-        input.placeholder = `Disfraz ${index + 1}`;
-      });
-    }
-
-    function updateDatosInputStyle(disabled) {
-      if (disabled) {
-        nombre.classList.add('disabled-input');
-        correo.classList.add('disabled-input');
-        celular.classList.add('disabled-input');
-        direccion.classList.add('disabled-input');
-      } else {
-        nombre.classList.remove('disabled-input');
-        correo.classList.remove('disabled-input');
-        celular.classList.remove('disabled-input');
-        direccion.classList.remove('disabled-input');
-      }
-    }
-
-    flexSwitchCheckDefault.addEventListener('change', () => {
-      if (flexSwitchCheckDefault.checked) {
-        // Código cuando el switch está activado
-        nombre.value = '';
-        correo.value = '';
-        celular.value = '';
-        direccion.value = '';
-        documentoInput.value = '';
+  $("#flexSwitchCheckDefault").on("change", function() {
+    if ($(this).is(":checked")) {
+      documentoInput.prop("disabled", true);
+      nombreInput.prop("disabled", false);
+      correoInput.prop("disabled", false);
+      celularInput.prop("disabled", false);
+      direccionInput.prop("disabled", false);
+    
+      documentoInput.css("background-color", "#f2f2f2");
+      nombreInput.removeClass("disabled-input").addClass("custom-color");
+      correoInput.removeClass("disabled-input").addClass("custom-color");
+      celularInput.removeClass("disabled-input").addClass("custom-color");
+      direccionInput.removeClass("disabled-input").addClass("custom-color");
+     
+    } else {
+      documentoInput.prop("disabled", false);
+      nombreInput.prop("disabled", true);
+      correoInput.prop("disabled", true);
+      celularInput.prop("disabled", true);
+      direccionInput.prop("disabled", true);
       
-        nombre.disabled = false;
-        correo.disabled = false;
-        celular.disabled = false;
-        direccion.disabled = false;
-        documentoInput.disabled = true;
-
-        updateDatosInputStyle(false); // Aplicar estilo cuando está deshabilitado
-      } else {
-        // Código cuando el switch está desactivado
-        nombre.value = 'Juan Perez';
-        correo.value = 'Juanperez@gmail.com';
-        celular.value = '987654321';
-        direccion.value = 'Casa Juan 158';
-        documentoInput.value = '43295671';
-        nombre.disabled = true;
-        correo.disabled = true;
-        celular.disabled = true;
-        direccion.disabled = true;
-        documentoInput.disabled = false;
-
-        updateDatosInputStyle(true); // Aplicar estilo cuando está habilitado
-      }
-    });
-
-    // Asignar la fecha actual a los campos de fecha de alquiler
-    const today = new Date();
-    rentalDay.value = today.getDate().toString().padStart(2, '0'); // Agrega un cero inicial si es necesario
-    rentalMonth.value = (today.getMonth() + 1).toString().padStart(2, '0'); // Los meses son 0-11
-    rentalYear.value = today.getFullYear();
-
-    // Deshabilitar los campos de fecha de alquiler
-    rentalDay.disabled = false;
-    rentalMonth.disabled = false;
-    rentalYear.disabled = false;
-
-    // Agregar nuevo disfraz
-    addArticleBtn.addEventListener('click', () => {
-      const articleGroup = document.createElement('div');
-      articleGroup.classList.add('form-group', 'article-group');
-      articleGroup.innerHTML = `
-        <input type="text" name="articulo[]" class="form-control mb-2" placeholder="Disfraz" />
-        <button type="button" class="btn btn-danger btn-sm remove-article-btn"><i class="bi bi-trash"></i></button>
-      `;
-      articlesSection.appendChild(articleGroup);
-      updateArticlePlaceholders();
-
-      // Agregar evento para el nuevo botón de eliminación
-      articleGroup.querySelector('.remove-article-btn').addEventListener('click', (e) => {
-        e.currentTarget.closest('.article-group').remove();
-        updateArticlePlaceholders();
-      });
-    });
-
-    // Agregar evento de eliminación a los botones existentes
-    document.querySelectorAll('.remove-article-btn').forEach(button => {
-      button.addEventListener('click', (e) => {
-        e.currentTarget.closest('.article-group').remove();
-        updateArticlePlaceholders();
-      });
-    });
-
-    updateArticlePlaceholders();
+      documentoInput.css("background-color", "#ffffff");
+      nombreInput.addClass("disabled-input").removeClass("custom-color");
+      correoInput.addClass("disabled-input").removeClass("custom-color");
+      celularInput.addClass("disabled-input").removeClass("custom-color");
+      direccionInput.addClass("disabled-input").removeClass("custom-color");
+     
+    }
   });
+
+  $("#add-article-btn").on("click", function() {
+    var newArticle = `<div class="form-group article-group">
+                        <input type="text" name="articulo[]" class="form-control mb-2" placeholder="Disfraz" />
+                        <button type="button" class="btn btn-danger btn-sm remove-article-btn"><i class="bi bi-trash"></i></button>
+                      </div>`;
+    $("#articles-section").append(newArticle);
+  });
+
+  $(document).on("click", ".remove-article-btn", function() {
+    $(this).closest(".form-group").remove();
+  });
+});
 </script>
 
 </body>
