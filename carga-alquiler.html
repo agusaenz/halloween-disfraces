@@ -163,6 +163,18 @@ body {
 	  justify-content: center;
 }
 	  
+
+    /* Estilo para el título del formulario */
+    h2.form-title {
+      text-align: left;
+      margin-bottom: 20px;
+      font-size: 1.0rem;
+      font-weight: bold;
+      color: #333; /* Color de texto personalizado */
+    }
+
+    
+
 @media (max-width: 768px) {
   .col-md-6 {
     flex: 0 0 100%; /* Para pantallas pequeñas, los campos ocuparán el 100% del ancho */
@@ -173,6 +185,9 @@ body {
 <body>
 <div class="container">
   <form class="custom-form" id="resizable-form">
+    <h2 class="form-title">Alquiler</h2> 
+    <hr class="my-2"> 
+    <section class="custom-br-divider">  </section>  <!-- Implementación de la clase custom-br -->
     <div class="form-group col-md-6">
       <div class="col-md-6" id="form-group">
         <label class="form-label" for="documento"><i class="bi bi-file-earmark-text"></i> Documento</label>
