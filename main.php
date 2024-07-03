@@ -1,10 +1,14 @@
+<?php
+require_once ('sidebar.php');
+?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Halloween Disfraces</title>
-  
+
   <!-- librerias -->
   <!-- bootstrap -->
   <link rel="stylesheet" href="assets/includes/css/bootstrap.min.css">
@@ -14,6 +18,9 @@
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/sidebar.css">
+   <script src="assets/js/sidebar.js"> </script>
+
 
   <style>
     body {
@@ -27,12 +34,13 @@
       margin: 0;
     }
 
-    .container-main {
+    .container {
       width: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-wrap: wrap;
+      width: 100%;
     }
 
     .custom-card-2 {
@@ -130,33 +138,38 @@
     }
 
 
+
     @keyframes slideDown {
       from {
         opacity: 0;
         transform: translateY(-10%);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
-
   </style>
 </head>
+
 <body>
-  <div class="container-main ">
+  <?php
+  echo $sidebar;
+  ?>
+  <div class="container">
     <div class="custom-card">
       <img src="assets/img/nueva-cuenta2.png" alt="Icono 1">
       <a href="#">Clientes</a>
     </div>
     <div class="custom-card-2">
-        <img src="assets/img/reserva2.png" alt="Icono 3">
-        <a href="#">Alquileres</a>
-        <div class="dropdown-content dropdown-content-main">
-          <a href="#">Lista de Alquileres</a>
-          <a href="#">Nuevo Alquiler</a>
-        </div>
+      <img src="assets/img/reserva2.png" alt="Icono 3">
+      <a href="#">Alquileres</a>
+      <div class="dropdown-content dropdown-content-main">
+        <a href="#">Lista de Alquileres</a>
+        <a href="#">Nuevo Alquiler</a>
       </div>
+    </div>
     <div class="custom-card">
       <img src="assets/img/administrar2.png" alt="Icono 2">
       <a href="#">Administracion</a>
@@ -166,11 +179,15 @@
 
   <script>
     document.querySelectorAll('.custom-card').forEach(card => {
-      card.addEventListener('click', function() {
+      card.addEventListener('click', function () {
         this.querySelector('.dropdown-content-main').classList.toggle('show');
       });
     });
+
+    adjustSidebarWidth(250)
+
   </script>
 
 </body>
+
 </html>
