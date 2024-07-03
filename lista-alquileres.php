@@ -1,3 +1,6 @@
+<?php
+require_once ('sidebar.php');
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -10,6 +13,8 @@
   <script src="assets/includes/js/jquery-3.7.1.min.js"></script>
   <script src="assets/includes/js/bootstrap.bundle.min.js"></script>
   <script src="assets/includes/DataTables/datatables.min.js"></script>
+  <link rel="stylesheet" href="assets/css/sidebar.css">
+  <script src="assets/js/sidebar.js"> </script>
 
   <style>
     body {
@@ -88,6 +93,9 @@
 </head>
 
 <body>
+<?php
+  echo $sidebar;
+  ?>
   <div class="container">
     <form class="custom-form" id="resizable-form" onsubmit="return false;">
       <h1 class="text-center">Lista de Alquileres</h1>
@@ -265,6 +273,7 @@
         generarTablaAlquileres();
       });
     });
+    adjustSidebarWidth(250) 
   </script>
 </body>
 

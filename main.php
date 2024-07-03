@@ -184,7 +184,7 @@ require_once ('sidebar.php');
       });
     });
 
-    adjustSidebarWidth(250)
+    adjustSidebarWidth(250)  
 
   </script>
 
