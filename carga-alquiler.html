@@ -98,7 +98,7 @@
     .btn-custom {
       background-color: #267ecf;
       color: white;
-      padding: 10px 20px;
+      padding: 7.3px 20px;
       border: none;
       border-radius: 5px;
       cursor: pointer;
@@ -152,7 +152,7 @@
       background-color: #28a745;
       /* Color verde para el botón de imprimir */
       color: white;
-      padding: 4px 14px;
+      padding: 7.3px 20px;
       border: none;
       border-radius: 5px;
       cursor: pointer;
@@ -196,7 +196,9 @@
       /* Color de texto personalizado */
     }
 
-
+    .btn-standard-font {
+      font-size: 1.0rem;
+    }
 
     @media (max-width: 768px) {
       .col-md-6 {
@@ -323,11 +325,11 @@
       </div>
       <div class="d-grid gap-2 d-md-flex justify-content-md-between">
         <div>
-          <button type="button" class="btn btn-custom me-md-2" onclick="cargarAlquiler()"><i class="bi bi-save"></i>
+          <button type="button" class="btn btn-custom btn-standard-font" onclick="cargarAlquiler()"><i class="bi bi-save"></i>
             Guardar</button>
-          <button type="button" class="btn btn-danger"><i class="bi bi-x-circle"></i> Cancelar</button>
+          <button type="button" class="btn btn-danger btn-standard-font"><i class="bi bi-x-circle"></i> Cancelar</button>
         </div>
-        <button type="button" class="btn btn-print"><i class="bi bi-printer"></i> Imprimir</button>
+        <button type="button" class="btn btn-print btn-standard-font"><i class="bi bi-printer"></i> Imprimir</button>
       </div>
     </form>
   </div>
@@ -408,7 +410,7 @@
       const correoInput = $("#correo");
       const celularInput = $("#celular");
       const direccionInput = $("#direccion");
-
+      const buscarBtn = $("#buscarBtn"); // Seleccionar el botón de buscar
 
       $("#flexSwitchCheckDefault").on("change", function () {
         if ($(this).is(":checked")) {
@@ -418,6 +420,7 @@
           celularInput.prop("disabled", false);
           direccionInput.prop("disabled", false);
 
+          buscarBtn.prop("disabled", true); // Deshabilitar el botón de buscar
           documentoInput.css("background-color", "#f2f2f2");
           nombreInput.removeClass("disabled-input").addClass("custom-color");
           correoInput.removeClass("disabled-input").addClass("custom-color");
@@ -431,6 +434,7 @@
           celularInput.prop("disabled", true);
           direccionInput.prop("disabled", true);
 
+          buscarBtn.prop("disabled", false); // Habilitar el botón de buscar
           documentoInput.css("background-color", "#ffffff");
           nombreInput.addClass("disabled-input").removeClass("custom-color");
           correoInput.addClass("disabled-input").removeClass("custom-color");
