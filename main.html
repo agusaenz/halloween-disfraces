@@ -27,7 +27,7 @@
       margin: 0;
     }
 
-    .container main main {
+    .container-main {
       width: 100%;
       display: flex;
       justify-content: center;
@@ -95,7 +95,7 @@
       margin: 5px 0 0;
     }
 
-    .dropdown-content {
+    .dropdown-content-main {
       display: none;
       position: absolute;
       top: 100%;
@@ -144,7 +144,7 @@
   </style>
 </head>
 <body>
-  <div class="container main main">
+  <div class="container-main ">
     <div class="custom-card">
       <img src="assets/img/nueva-cuenta2.png" alt="Icono 1">
       <a href="#">Clientes</a>
@@ -152,7 +152,7 @@
     <div class="custom-card-2">
         <img src="assets/img/reserva2.png" alt="Icono 3">
         <a href="#">Alquileres</a>
-        <div class="dropdown-content">
+        <div class="dropdown-content dropdown-content-main">
           <a href="#">Lista de Alquileres</a>
           <a href="#">Nuevo Alquiler</a>
         </div>
@@ -167,7 +167,7 @@
   <script>
     document.querySelectorAll('.custom-card').forEach(card => {
       card.addEventListener('click', function() {
-        this.querySelector('.dropdown-content').classList.toggle('show');
+        this.querySelector('.dropdown-content-main').classList.toggle('show');
       });
     });
   </script>
