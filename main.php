@@ -24,152 +24,118 @@ require_once('sidebar.php');
 
   <style>
     body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-color: #b39b9b;
-      font-family: 'Roboto', sans-serif;
-      font-size: 0.9rem;
-      margin: 0;
-    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #b39b9b;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.9rem;
+    margin: 0;
+}
 
-    .container {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      width: 100%;
-    }
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
 
-    .custom-card-2 {
-      background: white;
-      padding: 15px;
-      border-radius: 5px 5px 0 0;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-      width: 20%;
-      margin: 10px;
-      text-align: center;
-      position: relative;
-      cursor: pointer;
-    }
+.custom-card, .custom-card-2 {
+    background: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    width: 20%;
+    max-width: 200px; /* Set a fixed max-width */
+    min-width: 200px; /* Set a fixed min-width */
+    margin: 10px;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+}
 
-    .custom-card {
-      background: white;
-      padding: 15px;
-      border-radius: 5px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-      width: 20%;
-      margin: 10px;
-      text-align: center;
-      position: relative;
-      cursor: pointer;
-    }
+.custom-card img, .custom-card-2 img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+}
 
-    .custom-card img {
-      width: 50px;
-      height: 50px;
-      margin-bottom: 10px;
-    }
+.custom-card a, .custom-card-2 a {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
 
-    .custom-card-2 img {
-      width: 50px;
-      height: 50px;
-      margin-bottom: 10px;
-    }
+.custom-card p, .custom-card-2 p {
+    color: gray;
+    font-size: 0.8rem;
+    margin: 5px 0 0;
+}
 
-    .custom-card a {
-      color: black;
-      text-decoration: none;
-      font-weight: bold;
-    }
+.dropdown-content-main {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: white;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 0 0 10px 10px;
+    overflow: hidden;
+}
 
-    .custom-card p {
-      color: gray;
-      font-size: 0.8rem;
-      margin: 5px 0 0;
-    }
+.dropdown-content a {
+    text-decoration: none;
+    color: black;
+    display: block;
+    padding: 10px;
+}
 
-    .custom-card-2 a {
-      color: black;
-      text-decoration: none;
-      font-weight: bold;
-    }
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
 
-    .custom-card-2 p {
-      color: gray;
-      font-size: 0.8rem;
-      margin: 5px 0 0;
-    }
+.custom-card:hover .dropdown-content, .custom-card-2:hover .dropdown-content {
+    display: block;
+    animation: slideDown 0.3s ease-in-out;
+}
 
-    .dropdown-content-main {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      background-color: white;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-      z-index: 1;
-      border-radius: 0 0 10px 10px;
-      overflow: hidden;
-    }
+.sidebar-container {
+    width: 250px;
+    flex-shrink: 0;
+}
 
-    .dropdown-content a {
-      text-decoration: none;
-      color: black;
-      display: block;
-      padding: 10px;
-    }
+.content-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    overflow-y: auto;
+    margin-top: 70px;
+    height: 27vh;
+}
 
-    .dropdown-content a:hover {
-      background-color: #f1f1f1;
-    }
-
-    .custom-card:hover .dropdown-content {
-      display: block;
-      animation: slideDown 0.3s ease-in-out;
-    }
-
-    .custom-card-2:hover .dropdown-content {
-      display: block;
-      animation: slideDown 0.3s ease-in-out;
-    }
-
-    .sidebar-container {
-      width: 250px;
-      flex-shrink: 0;
-    }
-
+@media (max-height: 700px) {
     .content-container {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 20px;
-      overflow-y: auto;
-      margin-top: 70px;
-    }
-
-    @media (max-height: 700px) {
-      .content-container {
         margin-top: 50px;
-      }
     }
+}
 
-
-    @keyframes slideDown {
-      from {
+@keyframes slideDown {
+    from {
         opacity: 0;
         transform: translateY(-10%);
-      }
-
-      to {
+    }
+    to {
         opacity: 1;
         transform: translateY(0);
-      }
     }
+}
+
   </style>
 </head>
 
@@ -181,26 +147,31 @@ require_once('sidebar.php');
   </div>
   <div class="content-container">
     <div class="custom-card">
-      <img src="assets/img/nueva-cuenta2.png" alt="Icono 1">
-      <a href="#">Clientes</a>
+      <a href="lista-clientes.php">
+        <img src="assets/img/nueva-cuenta2.png" alt="Icono 1">
+        <span class="py-5 ">Clientes</span>
+      </a>
     </div>
     <div class="custom-card-2">
       <img src="assets/img/reserva2.png" alt="Icono 3">
       <a href="#">Alquileres</a>
       <div class="dropdown-content dropdown-content-main">
-        <a href="#">Lista de Alquileres</a>
-        <a href="#">Nuevo Alquiler</a>
+        <a href="lista-alquileres.php">Lista de Alquileres</a>
+        <a href="carga-alquiler.php">Nuevo Alquiler</a>
       </div>
     </div>
     <div class="custom-card">
-      <img src="assets/img/administrar2.png" alt="Icono 2">
-      <a href="#">Administracion</a>
+      <a href="administracion.php" class="custom-card-link">
+        <img src="assets/img/administrar2.png" alt="Icono 2">
+        <span class="py-5">Administracion</span>
+      </a>
     </div>
+
 
   </div>
 
   <script>
-    document.querySelectorAll('.custom-card').forEach(card => {
+    document.querySelectorAll('.custom-card-2').forEach(card => {
       card.addEventListener('click', function() {
         this.querySelector('.dropdown-content-main').classList.toggle('show');
       });
