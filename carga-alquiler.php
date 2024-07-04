@@ -1,5 +1,14 @@
 <?php
 require_once('sidebar.php');
+
+// recupero id si viene de editar
+$idAlquiler = 0;
+if (isset($_GET["idAlquiler"]) && is_numeric($_GET["idAlquiler"])) {
+  $idAlquiler = filter_input(INPUT_GET, 'idAlquiler', FILTER_SANITIZE_NUMBER_INT);
+}
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -60,9 +69,9 @@ require_once('sidebar.php');
       border-radius: 10px;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
       width: 60vw;
-      /* Increased width */
+      /* subo ancho */
       height: 80vh;
-      /* Increased height */
+      /* subo altura */
       overflow: auto;
     }
 
@@ -170,7 +179,6 @@ require_once('sidebar.php');
       /* Color verde más oscuro para el hover */
     }
 
-
     .col-md-6-alquiler {
       flex: 0 0 45%;
       /* Ajustar el tamaño de los campos al 48% del contenedor para dejar espacio entre ellos */
@@ -239,7 +247,7 @@ require_once('sidebar.php');
   </div>
   <div class="content-container alquiler">
     <form class="custom-form customform-alquiler" id="resizable-form">
-      <h2 class="form-title">Alquiler</h2>
+      <h2 class="form-title" id="titulo-alquiler">Alquiler</h2>
       <hr class="my-2">
       <section class="custom-br-divider"> </section> <!-- Implementación de la clase custom-br -->
       <div class="form-group col-md-6 col-md-6-alquiler">
@@ -249,7 +257,7 @@ require_once('sidebar.php');
           <div class="align-center">
             <input type="text" id="documento" class="form-control formcontrol-alquiler" />
             <aside>&nbsp; &nbsp; &nbsp;</aside>
-            <button type="button" class="btn btn-custom btn-custom-alquiler ms-2"><i class="bi bi-search"></i> Buscar</button>
+            <button type="button" id="buscarBtn" class="btn btn-custom btn-custom-alquiler ms-2" onclick="buscarDNI()"><i class="bi bi-search"></i> Buscar</button>
           </div>
         </div>
       </div>
@@ -352,7 +360,7 @@ require_once('sidebar.php');
       </div>
       <div class="d-grid gap-2 d-md-flex justify-content-md-between">
         <div>
-          <button type="button" class="btn btn-custom btn-custom-alquiler btn-standard-font" onclick="cargarAlquiler()"><i class="bi bi-save"></i>
+          <button id="boton-guardar" type="button" class="btn btn-custom btn-custom-alquiler btn-standard-font" onclick="cargarAlquiler()"><i class="bi bi-save"></i>
             Guardar</button>
           <button type="button" class="btn btn-danger btn-standard-font"><i class="bi bi-x-circle"></i> Cancelar</button>
         </div>
@@ -362,6 +370,45 @@ require_once('sidebar.php');
   </div>
 
   <script>
+    // guardo id en global para editar
+    var idAlquiler = <?php echo $idAlquiler; ?>;
+
+    function buscarDNI() {
+      let dni = $('#documento').val();
+      if (!dni && dni != "" && dni != undefined) {
+        alert("Ingrese un DNI para buscar.");
+        return;
+      }
+
+      let datos = "dni=" + dni;
+
+      $.ajax({
+        type: "POST",
+        url: "ajax/alquiler/buscarCliente.php",
+        data: datos,
+        dataType: "json",
+        success: function(data) {
+          if (data.estado == 1) {
+            let nombres = data.cliente.nombres;
+            let apellido = data.cliente.apellidos;
+            let telefono = data.cliente.telefono;
+            let domicilio = data.cliente.domicilio;
+            let correo = (data.cliente.correo != "") ? data.cliente.correo : '-';
+
+            $('#nombre').val(apellido + ", " + nombres);
+            $('#correo').val(correo);
+            $('#celular').val(telefono);
+            $('#direccion').val(domicilio);
+          } else if (data.estado == 2) {
+            alert("No se ha encontrado ningún cliente con DNI " + dni + ".");
+          }
+        },
+        error: function() {
+          alert("Ha ocurrido un error durante la operación.");
+        },
+      });
+    }
+
     function cargarAlquiler() {
       let variablesFaltantes = [];
       let vars = [{
@@ -423,6 +470,11 @@ require_once('sidebar.php');
         datos += "&dni=" + dni;
       }
 
+      let __id = -1;
+      // si pasé id (editar), la igualo, sino, la mando en 0
+      if (idAlquiler != undefined && idAlquiler != 0) __id = idAlquiler;
+      datos += "&idAlquiler=" + __id;
+
       $.ajax({
         type: "POST",
         url: "ajax/alquiler/registrarAlquiler.php",
@@ -443,14 +495,75 @@ require_once('sidebar.php');
       });
     }
 
+    function buscarAlquiler() {
+      let datos = "idAlquiler=" + idAlquiler;
+
+      $.ajax({
+        type: 'POST',
+        url: 'ajax/alquiler/recuperarAlquiler.php',
+        data: datos,
+        dataType: 'json',
+        success: function(data) {
+          if (data.estado == 1) {
+            let correo = data.alquiler.correo; //
+            let apellidos = data.alquiler.apellidos; //
+            let deposito = data.alquiler.deposito; //
+            let detalle = data.alquiler.detalle; //
+            let disfraces = data.alquiler.disfraces; //
+            let domicilio = data.alquiler.domicilio; //
+            let fechaAlquiler = data.alquiler.fechaAlquiler; //
+            let fechaDevolucion = data.alquiler.fechaDevolucion; //
+            let formaDePago = data.alquiler.formaDePago;
+            let nombres = data.alquiler.nombres; //
+            let numero_documento = data.alquiler.numero_documento; //
+            let telefono = data.alquiler.telefono; //
+            let total = data.alquiler.total; //
+
+            $('#documento').val(numero_documento);
+            $('#nombre').val(apellidos + ", " + nombres);
+            $('#correo').val(correo);
+            $('#celular').val(telefono);
+            $('#direccion').val(domicilio);
+
+            $('#disfraz').val(disfraces);
+            $('#total').val(total);
+            $('#deposito').val(deposito);
+            $('#detalle').val(detalle);
+
+            $('#fechaAlq').val(formatDateForInput(fechaAlquiler));
+            $('#fechaDev').val(formatDateForInput(fechaDevolucion));
+
+            // $('#formaPago').val(correo);
+
+          }
+        },
+        error: function(txt) {
+          alert("Ha ocurrido un error. Por favor, intente nuevamente en unos minutos.");
+        }
+      });
+    }
+
+    function formatDateForInput(dateStr) {
+      // dateStr is expected to be in 'd/m/Y' format
+      let parts = dateStr.split('/');
+      return parts[2] + '-' + parts[1] + '-' + parts[0];
+    }
+
     $(document).ready(function() {
       $('input').val('');
       $('textarea').val('');
+      $('#flexSwitchCheckDefault').prop("checked", false);
       $(document).ready(function() {
         $('input[type=number]').on('wheel', function(e) {
           e.preventDefault();
         });
       });
+
+      if (idAlquiler != undefined && idAlquiler != 0) {
+        buscarAlquiler();
+        $('#titulo-alquiler').html('Editar Alquiler');
+        $('#boton-guardar').text('Guardar cambios');
+      }
 
       const documentoInput = $("#documento");
       const nombreInput = $("#nombre");
@@ -460,6 +573,11 @@ require_once('sidebar.php');
       const buscarBtn = $("#buscarBtn"); // Seleccionar el botón de buscar
 
       $("#flexSwitchCheckDefault").on("change", function() {
+        documentoInput.val('');
+        nombreInput.val('');
+        correoInput.val('');
+        celularInput.val('');
+        direccionInput.val('');
         if ($(this).is(":checked")) {
           documentoInput.prop("disabled", true);
           nombreInput.prop("disabled", false);

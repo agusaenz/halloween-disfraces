@@ -1,6 +1,6 @@
 <?php
 
-require_once ('../../aut_config.inc.php');
+require_once('../../aut_config.inc.php');
 
 try {
     $db = new PDO('mysql:host=' . $sql_host . ';dbname=' . $sql_db . ';charset=utf8', $sql_usuario, $sql_pass);
@@ -33,15 +33,16 @@ try {
     }
 
     $sqlGet = "SELECT a.*, c.apellidos, c.nombres, c.numero_documento 
-               FROM alquileres a
-               JOIN clientes c ON a.idCliente = c.idCliente
-               WHERE a.activo = 1" . $whereStr . "
-               ORDER BY a.fechaAlquiler DESC";
+           FROM alquileres a
+           LEFT JOIN clientes c ON a.idCliente = c.idCliente
+           WHERE a.activo = 1" . $whereStr . "
+           ORDER BY a.fechaAlquiler DESC";
 
     $stmt = $db->prepare($sqlGet);
     $stmt->execute($param);
 
     $alquileres = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 
     if (count($alquileres) > 0) {
         $tabla = [];
@@ -50,13 +51,20 @@ try {
             $fechaformatAlq = $fechaAlq->format('d / m / Y');
             $fechaDev = DateTime::createFromFormat('Y-m-d', $alquiler['fechaDevolucion']);
             $fechaformatDev = $fechaDev->format('d / m / Y');
-            $acciones = "<button class='btn btn-primary verAlquilerBtn'>Ver / editar</button>
+
+            $nombres = $alquiler['nombres'];
+            $apellidos = $alquiler['apellidos'];
+            $apenom = ($nombres && $apellidos) ? $apellidos . ", " . $nombres : '-';
+
+            $dni = $alquiler['numero_documento'] ? $alquiler['numero_documento'] : '-';
+
+            $acciones = "<a class='btn btn-primary verAlquilerBtn' href='carga-alquiler.php?idAlquiler={$alquiler['idAlquiler']}'>Ver / editar</a>
             <button class='btn btn-success verAlquilerBtn'>Imprimir</button>
             <button class='btn btn-danger eliminarAlquilerBtn ml-2' onclick='borrarAlquiler(event, {$alquiler['idAlquiler']})'>Eliminar</button>";
 
             $tabla[] = [
-                $alquiler['apellidos'] . ' ' . $alquiler['nombres'],
-                $alquiler['numero_documento'],
+                $apenom,
+                $dni,
                 $fechaformatAlq,
                 $fechaformatDev,
                 "$" . $alquiler['total'],
@@ -74,4 +82,3 @@ try {
     echo "Ocurrio un error durante la operación." . $err->getMessage();
     die();
 }
-

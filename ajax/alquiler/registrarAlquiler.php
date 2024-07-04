@@ -23,6 +23,9 @@ $deposito = isset($_POST["deposito"]) ? filter_input(INPUT_POST, 'deposito', FIL
 $formaPago = isset($_POST["formaPago"]) ? filter_input(INPUT_POST, 'formaPago', FILTER_SANITIZE_STRING) : null;
 $detalle = isset($_POST["detalle"]) ? filter_input(INPUT_POST, 'detalle', FILTER_SANITIZE_STRING) : null;
 
+if (isset($_POST['idAlquiler']))
+    $idAlquiler = filter_input(INPUT_POST, 'idAlquiler', FILTER_SANITIZE_NUMBER_INT);
+
 switch ($formaPago) {
     case 'efectivo':
         $formaPago = 1;
@@ -51,21 +54,68 @@ switch ($formaPago) {
 
 try {
     $param = [];
-    if (isset($_POST["dni"]) && $_POST["dni"] != null && $_POST["dni"] != '') {
-        $dni = trim(filter_input(INPUT_POST, 'dni', FILTER_SANITIZE_NUMBER_INT));
-        $sqlFind = "SELECT idCliente FROM clientes WHERE numero_documento = :dni AND activo = 1";
-        $stmtFind = $db->prepare($sqlFind);
-        $stmtFind->execute([':dni' => $dni]);
-        $resultado = $stmtFind->fetch(PDO::FETCH_ASSOC);
 
-        if ($resultado) {
-            $idCliente = $resultado['idCliente'];
+    if (isset($_POST['idAlquiler']) && $_POST['idAlquiler'] != -1) { // caso editar
+        $sqlUpd = " UPDATE alquileres
+                    SET disfraces = :disfraces, detalle = :detalle, total = :total,
+                        deposito = :deposito, formaDePago = :formaDePago,
+                        fechaAlquiler = :fechaAlquiler, fechaDevolucion = :fechaDevolucion
+                    WHERE idAlquiler = :idAlquiler";
 
-            $sql = "INSERT INTO alquileres (idCliente, disfraces, detalle, total, deposito, formaDePago, fechaAlquiler, fechaDevolucion)
-                    VALUES (:idCliente, :disfraz, :detalle, :total, :deposito, :formaPago, :fechaAlq, :fechaDev)";
+        $param = [
+            ":disfraces" => $disfraz,
+            ":detalle" => $detalle,
+            ":total" => $total,
+            ":deposito" => $deposito,
+            ":formaDePago" => $formaPago,
+            ":fechaAlquiler" => $fechaAlq,
+            ":fechaDevolucion" => $fechaDev,
+            ":idAlquiler" => $idAlquiler
+        ];
+
+        $stmtUpd = $db->prepare($sqlUpd);
+        $stmtUpd->execute($param);
+        $retorno['estado'] = 1;
+        echo json_encode($retorno);
+        die();
+    } else { // caso guardar nuevo
+        if (isset($_POST["dni"]) && $_POST["dni"] != null && $_POST["dni"] != '') { // caso asociado
+            $dni = trim(filter_input(INPUT_POST, 'dni', FILTER_SANITIZE_NUMBER_INT));
+            $sqlFind = "SELECT idCliente 
+                        FROM clientes 
+                        WHERE numero_documento = :dni AND activo = 1";
+
+            $stmtFind = $db->prepare($sqlFind);
+            $stmtFind->execute([':dni' => $dni]);
+            $resultado = $stmtFind->fetch(PDO::FETCH_ASSOC);
+
+            if ($resultado) {
+                $idCliente = $resultado['idCliente'];
+
+                $sql = "INSERT INTO alquileres (idCliente, disfraces, detalle, total, deposito, formaDePago, fechaAlquiler, fechaDevolucion)
+                        VALUES (:idCliente, :disfraz, :detalle, :total, :deposito, :formaPago, :fechaAlq, :fechaDev)";
+
+                $param = [
+                    ":idCliente" => $idCliente,
+                    ":disfraz" => $disfraz,
+                    ":detalle" => $detalle,
+                    ":total" => $total,
+                    ":deposito" => $deposito,
+                    ":formaPago" => $formaPago,
+                    ":fechaAlq" => $fechaAlq,
+                    ":fechaDev" => $fechaDev
+                ];
+            } else {
+                $retorno['estado'] = 2;
+                $retorno['errores'] = "Ocurrio un error durante la operación.";
+                echo json_encode($retorno);
+                die();
+            }
+        } else { // caso sin asociar
+            $sql = "INSERT INTO alquileres (disfraces, detalle, total, deposito, formaDePago, fechaAlquiler, fechaDevolucion)
+                        VALUES (:disfraz, :detalle, :total, :deposito, :formaPago, :fechaAlq, :fechaDev)";
 
             $param = [
-                ":idCliente" => $idCliente,
                 ":disfraz" => $disfraz,
                 ":detalle" => $detalle,
                 ":total" => $total,
@@ -74,29 +124,11 @@ try {
                 ":fechaAlq" => $fechaAlq,
                 ":fechaDev" => $fechaDev
             ];
-        } else {
-            $retorno['estado'] = 2;
-            $retorno['errores'] = "Ocurrio un error durante la operación.";
-            echo json_encode($retorno);
-            die();
         }
-    } else {
-        $sql = "INSERT INTO alquileres (disfraces, detalle, total, deposito, formaDePago, fechaAlquiler, fechaDevolucion)
-                    VALUES (:disfraz, :detalle, :total, :deposito, :formaPago, :fechaAlq, :fechaDev)";
-
-        $param = [
-            ":disfraz" => $disfraz,
-            ":detalle" => $detalle,
-            ":total" => $total,
-            ":deposito" => $deposito,
-            ":formaPago" => $formaPago,
-            ":fechaAlq" => $fechaAlq,
-            ":fechaDev" => $fechaDev
-        ];
+        $stmtInsert = $db->prepare($sql);
+        $stmtInsert->execute($param);
+        $retorno['estado'] = 1;
     }
-    $stmtInsert = $db->prepare($sql);
-    $stmtInsert->execute($param);
-    $retorno['estado'] = 1;
     echo json_encode($retorno);
     die();
 } catch (PDOException $err) {
