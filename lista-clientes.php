@@ -15,6 +15,7 @@ require_once ('sidebar.php');
   <script src="assets/includes/DataTables/datatables.min.js"></script>
   <link rel="stylesheet" href="assets/css/sidebar.css">
   <script src="assets/js/sidebar.js"> </script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
   <style>
     body {

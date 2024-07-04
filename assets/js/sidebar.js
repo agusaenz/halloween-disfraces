@@ -2,8 +2,8 @@
 // Función para ajustar el ancho de la sidebar y el contenido principal
 function adjustSidebarWidth(width) {
   document.querySelector('.sidebar').style.width = width + 'px';
-  document.querySelector('.content').style.marginLeft = width + 'px';
-  document.querySelector('.content').style.width = 'calc(100% - ' + width + 'px)';
+  // document.querySelector('.content').style.marginLeft = width + 'px';
+  // document.querySelector('.content').style.width = 'calc(100% - ' + width + 'px)';
 }
 
 

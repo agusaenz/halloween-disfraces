@@ -1,5 +1,5 @@
 <?php
-require_once ('sidebar.php');
+require_once('sidebar.php');
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -19,7 +19,7 @@ require_once ('sidebar.php');
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/sidebar.css">
-   <script src="assets/js/sidebar.js"> </script>
+  <script src="assets/js/sidebar.js"></script>
 
 
   <style>
@@ -137,6 +137,26 @@ require_once ('sidebar.php');
       animation: slideDown 0.3s ease-in-out;
     }
 
+    .sidebar-container {
+      width: 250px;
+      flex-shrink: 0;
+    }
+
+    .content-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 20px;
+      overflow-y: auto;
+      margin-top: 70px;
+    }
+
+    @media (max-height: 700px) {
+      .content-container {
+        margin-top: 50px;
+      }
+    }
 
 
     @keyframes slideDown {
@@ -154,10 +174,12 @@ require_once ('sidebar.php');
 </head>
 
 <body>
-  <?php
-  echo $sidebar;
-  ?>
-  <div class="container">
+  <div class="sidebar-container">
+    <?php
+    echo $sidebar;
+    ?>
+  </div>
+  <div class="content-container">
     <div class="custom-card">
       <img src="assets/img/nueva-cuenta2.png" alt="Icono 1">
       <a href="#">Clientes</a>
@@ -179,13 +201,12 @@ require_once ('sidebar.php');
 
   <script>
     document.querySelectorAll('.custom-card').forEach(card => {
-      card.addEventListener('click', function () {
+      card.addEventListener('click', function() {
         this.querySelector('.dropdown-content-main').classList.toggle('show');
       });
     });
 
-    adjustSidebarWidth(250)  
-
+    adjustSidebarWidth(250)
   </script>
 
 </body>

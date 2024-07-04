@@ -13,8 +13,9 @@ require_once ('sidebar.php');
   <script defer src="assets/includes/js/bootstrap.bundle.min.js"></script>
   <script src="assets/includes/js/jquery-3.7.1.min.js"></script>
   <script src="assets/includes/DataTables/datatables.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/sidebar.css">
-  <script src="assets/js/sidebar.js"> </script>
+  <script src="assets/js/sidebar.js"></script>
 
   <style>
     body {

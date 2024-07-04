@@ -1,5 +1,5 @@
 <?php
-require_once ('sidebar.php');
+require_once('sidebar.php');
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -31,7 +31,7 @@ require_once ('sidebar.php');
       -moz-appearance: textfield;
     }
 
-    body  {
+    body {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -207,14 +207,37 @@ require_once ('sidebar.php');
         /* Para pantallas pequeñas, los campos ocuparán el 100% del ancho */
       }
     }
+
+    .sidebar-container {
+      width: 250px;
+      flex-shrink: 0;
+    }
+
+    .content-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      overflow-y: auto;
+      margin-top: 70px;
+    }
+
+    @media (max-height: 700px) {
+      .content-container {
+        margin-top: 50px;
+      }
+    }
   </style>
 </head>
 
 <body>
-<?php
-  echo $sidebar;
-  ?>
-  <div class="container alquiler">
+  <div class="sidebar-container">
+    <?php
+    echo $sidebar;
+    ?>
+  </div>
+  <div class="content-container alquiler">
     <form class="custom-form customform-alquiler" id="resizable-form">
       <h2 class="form-title">Alquiler</h2>
       <hr class="my-2">
@@ -339,20 +362,39 @@ require_once ('sidebar.php');
   </div>
 
   <script>
-
     function cargarAlquiler() {
       let variablesFaltantes = [];
-      let vars = [
-        { id: 'disfraz', name: 'Disfraz' },
-        { id: 'fechaAlq', name: 'Fecha Alquiler' },
-        { id: 'fechaDev', name: 'Fecha Devolución' },
-        { id: 'total', name: 'Total' },
-        { id: 'deposito', name: 'Depósito' },
-        { id: 'formaPago', name: 'Forma de Pago' },
-        { id: 'detalle', name: 'Detalle' }
+      let vars = [{
+          id: 'disfraz',
+          name: 'Disfraz'
+        },
+        {
+          id: 'fechaAlq',
+          name: 'Fecha Alquiler'
+        },
+        {
+          id: 'fechaDev',
+          name: 'Fecha Devolución'
+        },
+        {
+          id: 'total',
+          name: 'Total'
+        },
+        {
+          id: 'deposito',
+          name: 'Depósito'
+        },
+        {
+          id: 'formaPago',
+          name: 'Forma de Pago'
+        },
+        {
+          id: 'detalle',
+          name: 'Detalle'
+        }
       ];
 
-      vars.forEach(function (vars) {
+      vars.forEach(function(vars) {
         if (!$(`#${vars.id}`).val()) {
           variablesFaltantes.push(vars.name);
         }
@@ -367,7 +409,7 @@ require_once ('sidebar.php');
 
       let datosArray = [];
 
-      vars.forEach(function (vars) {
+      vars.forEach(function(vars) {
         let value = $(`#${vars.id}`).val();
         if (value) {
           datosArray.push(`${vars.id}=${value}`);
@@ -386,7 +428,7 @@ require_once ('sidebar.php');
         url: "ajax/alquiler/registrarAlquiler.php",
         data: datos,
         dataType: "json",
-        success: function (data) {
+        success: function(data) {
           if (data.estado == 1) {
             alert("Alquiler cargado exitosamente.");
             $('input').val('');
@@ -395,17 +437,17 @@ require_once ('sidebar.php');
             alert("Ha ocurrido un error durante la operación.");
           }
         },
-        error: function () {
+        error: function() {
           alert("Ha ocurrido un error durante la operación.");
         },
       });
     }
 
-    $(document).ready(function () {
+    $(document).ready(function() {
       $('input').val('');
       $('textarea').val('');
-      $(document).ready(function () {
-        $('input[type=number]').on('wheel', function (e) {
+      $(document).ready(function() {
+        $('input[type=number]').on('wheel', function(e) {
           e.preventDefault();
         });
       });
@@ -417,7 +459,7 @@ require_once ('sidebar.php');
       const direccionInput = $("#direccion");
       const buscarBtn = $("#buscarBtn"); // Seleccionar el botón de buscar
 
-      $("#flexSwitchCheckDefault").on("change", function () {
+      $("#flexSwitchCheckDefault").on("change", function() {
         if ($(this).is(":checked")) {
           documentoInput.prop("disabled", true);
           nombreInput.prop("disabled", false);
