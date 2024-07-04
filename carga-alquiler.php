@@ -1,3 +1,6 @@
+<?php
+require_once ('sidebar.php');
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -12,6 +15,8 @@
   <script src="assets/includes/js/jquery-3.7.1.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/sidebar.css">
+  <script src="assets/js/sidebar.js"> </script>
 
   <style>
     /* Chrome, Safari, Edge, Opera */
@@ -26,7 +31,7 @@
       -moz-appearance: textfield;
     }
 
-    body {
+    body  {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -39,7 +44,7 @@
       /* Evita el scrolling de la página */
     }
 
-    .container {
+    .alquiler {
       width: 100%;
       height: 100%;
       display: flex;
@@ -49,14 +54,14 @@
       /* Permite el scrolling si es necesario */
     }
 
-    .custom-form {
+    .customform-alquiler {
       background: white;
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-      width: 80vw;
+      width: 60vw;
       /* Increased width */
-      height: 90vh;
+      height: 80vh;
       /* Increased height */
       overflow: auto;
     }
@@ -71,7 +76,7 @@
       width: 100%;
     }
 
-    .form-control {
+    .formcontrol-alquiler {
       width: 100%;
       box-sizing: border-box;
       border-radius: 10px;
@@ -95,7 +100,7 @@
       /* Color personalizado cuando está activado */
     }
 
-    .btn-custom {
+    .btn-custom-alquiler {
       background-color: #267ecf;
       color: white;
       padding: 7.3px 20px;
@@ -165,17 +170,13 @@
       /* Color verde más oscuro para el hover */
     }
 
-    .col-md-8 {
-      flex: 0 0 50%;
-      /* Ajustar el tamaño de los campos al 48% del contenedor para dejar espacio entre ellos */
-    }
 
-    .col-md-6 {
+    .col-md-6-alquiler {
       flex: 0 0 45%;
       /* Ajustar el tamaño de los campos al 48% del contenedor para dejar espacio entre ellos */
     }
 
-    .col-md-4 {
+    .col-md-4-alquiler {
       flex: 0 0 30%;
       /* Ajustar el tamaño de los campos al 48% del contenedor para dejar espacio entre ellos */
     }
@@ -201,7 +202,7 @@
     }
 
     @media (max-width: 768px) {
-      .col-md-6 {
+      .col-md-6-alquiler {
         flex: 0 0 100%;
         /* Para pantallas pequeñas, los campos ocuparán el 100% del ancho */
       }
@@ -210,31 +211,34 @@
 </head>
 
 <body>
-  <div class="container">
-    <form class="custom-form" id="resizable-form">
+<?php
+  echo $sidebar;
+  ?>
+  <div class="container alquiler">
+    <form class="custom-form customform-alquiler" id="resizable-form">
       <h2 class="form-title">Alquiler</h2>
       <hr class="my-2">
       <section class="custom-br-divider"> </section> <!-- Implementación de la clase custom-br -->
-      <div class="form-group col-md-6">
-        <div class="col-md-6" id="form-group">
+      <div class="form-group col-md-6 col-md-6-alquiler">
+        <div class="col-md-6 col-md-6-alquiler" id="form-group">
           <label class="form-label" for="documento"><i class="bi bi-file-earmark-text"></i> Documento</label>
           <section class="custom-br-text"> </section>
           <div class="align-center">
-            <input type="text" id="documento" class="form-control" />
+            <input type="text" id="documento" class="form-control formcontrol-alquiler" />
             <aside>&nbsp; &nbsp; &nbsp;</aside>
-            <button type="button" class="btn btn-custom ms-2"><i class="bi bi-search"></i> Buscar</button>
+            <button type="button" class="btn btn-custom btn-custom-alquiler ms-2"><i class="bi bi-search"></i> Buscar</button>
           </div>
         </div>
       </div>
 
       <div class="row mb-4">
         <div class="horizontal-group">
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-6 col-md-6-alquiler">
             <label class="form-label" for="nombre"><i class="bi bi-person-circle"></i> Nombre y apellido</label>
             <section class="custom-br-text"></section>
             <input type="text" id="nombre" class="form-control disabled-input" disabled />
           </div>
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-6 col-md-6-alquiler">
             <label class="form-label" for="correo"><i class="bi bi-envelope"></i> Correo</label>
             <section class="custom-br-text"></section>
             <input type="email" id="correo" class="form-control disabled-input" disabled />
@@ -244,12 +248,12 @@
 
       <div class="row mb-4">
         <div class="horizontal-group">
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-6 col-md-6-alquiler">
             <label class="form-label" for="celular"><i class="bi bi-telephone"></i> Celular</label>
             <section class="custom-br-text"></section>
             <input type="text" id="celular" class="form-control disabled-input" disabled />
           </div>
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-6 col-md-6-alquiler">
             <label class="form-label" for="direccion"><i class="bi bi-geo-alt"></i> Dirección</label>
             <section class="custom-br-text"></section>
             <input type="text" id="direccion" class="form-control disabled-input" disabled />
@@ -270,46 +274,46 @@
         <section class="custom-br-text"> </section>
         <div id="articles-section">
           <div class="form-group article-group">
-            <input type="text" id="disfraz" class="form-control" />
+            <input type="text" id="disfraz" class="form-control formcontrol-alquiler" />
           </div>
         </div>
       </div>
 
       <div class="row mb-4">
-        <div class="col-md-6 form-group">
+        <div class="col-md-6 col-md-6-alquiler form-group">
           <label class="form-label"><i class="bi bi-calendar"></i> Fecha de alquiler</label>
           <section class="custom-br-text"></section>
 
-          <input type="date" id="fechaAlq" class="form-control" placeholder="Fecha fin" lang="es" />
+          <input type="date" id="fechaAlq" class="form-control formcontrol-alquiler" placeholder="Fecha fin" lang="es" />
 
         </div>
-        <div class="col-md-6 form-group">
+        <div class="col-md-6 col-md-6-alquiler form-group">
           <label class="form-label"><i class="bi bi-calendar"></i> Fecha de devolución</label>
           <section class="custom-br-text"></section>
 
-          <input type="date" id="fechaDev" class="form-control" placeholder="Fecha fin" lang="es" />
+          <input type="date" id="fechaDev" class="form-control formcontrol-alquiler" placeholder="Fecha fin" lang="es" />
 
         </div>
       </div>
 
       <div class="row mb-4 ">
 
-        <div class="col-md-4 form-group">
+        <div class="col-md-4 col-md-4-alquiler form-group">
           <label class="form-label"><i class="bi bi-cash"></i> Total</label>
           <section class="custom-br-text"></section>
-          <input type="number" id="total" class="form-control" />
+          <input type="number" id="total" class="form-control formcontrol-alquiler" />
         </div>
 
-        <div class="col-md-4 form-group">
+        <div class="col-md-4 col-md-4-alquiler form-group">
           <label class="form-label"><i class="bi bi-cash"></i> Depósito</label>
           <section class="custom-br-text"></section>
-          <input type="number" id="deposito" class="form-control" />
+          <input type="number" id="deposito" class="form-control formcontrol-alquiler" />
         </div>
 
-        <div class="col-md-4 form-group">
+        <div class="col-md-4 col-md-4-alquiler form-group">
           <label class="form-label"><i class="bi bi-credit-card"></i> Forma de pago</label>
           <section class="custom-br-text"></section>
-          <select id="formaPago" class="form-control">
+          <select id="formaPago" class="form-control formcontrol-alquiler">
             <option value="efectivo">Efectivo</option>
             <option value="debito">Débito</option>
             <option value="credito">Crédito</option>
@@ -321,11 +325,11 @@
       <div class="form-group">
         <label class="form-label" for="detalle"><i class="bi bi-pencil-square"></i> Detalle</label>
 
-        <textarea class="form-control" id="detalle" rows="4"></textarea>
+        <textarea class="form-control formcontrol-alquiler" id="detalle" rows="4"></textarea>
       </div>
       <div class="d-grid gap-2 d-md-flex justify-content-md-between">
         <div>
-          <button type="button" class="btn btn-custom btn-standard-font" onclick="cargarAlquiler()"><i class="bi bi-save"></i>
+          <button type="button" class="btn btn-custom btn-custom-alquiler btn-standard-font" onclick="cargarAlquiler()"><i class="bi bi-save"></i>
             Guardar</button>
           <button type="button" class="btn btn-danger btn-standard-font"><i class="bi bi-x-circle"></i> Cancelar</button>
         </div>
@@ -335,6 +339,7 @@
   </div>
 
   <script>
+
     function cargarAlquiler() {
       let variablesFaltantes = [];
       let vars = [
@@ -444,6 +449,7 @@
         }
       });
     });
+    adjustSidebarWidth(250)
   </script>
 
 </body>
