@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Generate and Print PDF</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <button id="generatePdf">Generate PDF</button>
+    <a id="pdfLink" href="#" target="_blank" style="display:none;">Open PDF</a>
+
+    <script>
+        $(document).ready(function () {
+            $('#generatePdf').click(function () {
+                $.ajax({
+                    url: 'ajax/imprimirAlquiler.php',
+                    method: 'GET',
+                    xhrFields: {
+                        responseType: 'blob'
+                    },
+                    success: function (data) {
+                        console.log('AJAX request succeeded:', data);
+                        var blob = new Blob([data], { type: 'application/pdf' });
+                        var url = window.URL.createObjectURL(blob);
+                        console.log('Generated Blob URL:', url);
+
+                        var pdfLink = document.getElementById('pdfLink');
+                        pdfLink.href = url;
+                        pdfLink.style.display = 'block';
+                        pdfLink.click();
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.error('AJAX request failed:', textStatus, errorThrown);
+                        alert('Error generating PDF file');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
