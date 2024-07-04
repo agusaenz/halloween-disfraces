@@ -485,6 +485,7 @@ if (isset($_GET["idAlquiler"]) && is_numeric($_GET["idAlquiler"])) {
             alert("Alquiler cargado exitosamente.");
             $('input').val('');
             $('textarea').val('');
+            idAlquiler = -1;
           } else if (data.estado == 2) {
             alert("Ha ocurrido un error durante la operación.");
           }
@@ -498,49 +499,51 @@ if (isset($_GET["idAlquiler"]) && is_numeric($_GET["idAlquiler"])) {
     function buscarAlquiler() {
       let datos = "idAlquiler=" + idAlquiler;
 
-      $.ajax({
-        type: 'POST',
-        url: 'ajax/alquiler/recuperarAlquiler.php',
-        data: datos,
-        dataType: 'json',
-        success: function(data) {
-          if (data.estado == 1) {
-            let correo = data.alquiler.correo; //
-            let apellidos = data.alquiler.apellidos; //
-            let deposito = data.alquiler.deposito; //
-            let detalle = data.alquiler.detalle; //
-            let disfraces = data.alquiler.disfraces; //
-            let domicilio = data.alquiler.domicilio; //
-            let fechaAlquiler = data.alquiler.fechaAlquiler; //
-            let fechaDevolucion = data.alquiler.fechaDevolucion; //
-            let formaDePago = data.alquiler.formaDePago;
-            let nombres = data.alquiler.nombres; //
-            let numero_documento = data.alquiler.numero_documento; //
-            let telefono = data.alquiler.telefono; //
-            let total = data.alquiler.total; //
+      if (idAlquiler != -1 && idAlquiler != 0) {
+        $.ajax({
+          type: 'POST',
+          url: 'ajax/alquiler/recuperarAlquiler.php',
+          data: datos,
+          dataType: 'json',
+          success: function(data) {
+            if (data.estado == 1) {
+              let correo = data.alquiler.correo; //
+              let apellidos = data.alquiler.apellidos; //
+              let deposito = data.alquiler.deposito; //
+              let detalle = data.alquiler.detalle; //
+              let disfraces = data.alquiler.disfraces; //
+              let domicilio = data.alquiler.domicilio; //
+              let fechaAlquiler = data.alquiler.fechaAlquiler; //
+              let fechaDevolucion = data.alquiler.fechaDevolucion; //
+              let formaDePago = data.alquiler.formaDePago;
+              let nombres = data.alquiler.nombres; //
+              let numero_documento = data.alquiler.numero_documento; //
+              let telefono = data.alquiler.telefono; //
+              let total = data.alquiler.total; //
 
-            $('#documento').val(numero_documento);
-            $('#nombre').val(apellidos + ", " + nombres);
-            $('#correo').val(correo);
-            $('#celular').val(telefono);
-            $('#direccion').val(domicilio);
+              $('#documento').val(numero_documento);
+              $('#nombre').val(apellidos + ", " + nombres);
+              $('#correo').val(correo);
+              $('#celular').val(telefono);
+              $('#direccion').val(domicilio);
 
-            $('#disfraz').val(disfraces);
-            $('#total').val(total);
-            $('#deposito').val(deposito);
-            $('#detalle').val(detalle);
+              $('#disfraz').val(disfraces);
+              $('#total').val(total);
+              $('#deposito').val(deposito);
+              $('#detalle').val(detalle);
 
-            $('#fechaAlq').val(formatDateForInput(fechaAlquiler));
-            $('#fechaDev').val(formatDateForInput(fechaDevolucion));
+              $('#fechaAlq').val(formatDateForInput(fechaAlquiler));
+              $('#fechaDev').val(formatDateForInput(fechaDevolucion));
 
-            // $('#formaPago').val(correo);
+              // $('#formaPago').val(correo);
 
+            }
+          },
+          error: function(txt) {
+            alert("Ha ocurrido un error. Por favor, intente nuevamente en unos minutos.");
           }
-        },
-        error: function(txt) {
-          alert("Ha ocurrido un error. Por favor, intente nuevamente en unos minutos.");
-        }
-      });
+        });
+      }
     }
 
     function formatDateForInput(dateStr) {
@@ -559,7 +562,7 @@ if (isset($_GET["idAlquiler"]) && is_numeric($_GET["idAlquiler"])) {
         });
       });
 
-      if (idAlquiler != undefined && idAlquiler != 0) {
+      if (idAlquiler != undefined && idAlquiler != 0 && idAlquiler != -1) {
         buscarAlquiler();
         $('#titulo-alquiler').html('Editar Alquiler');
         $('#boton-guardar').text('Guardar cambios');
