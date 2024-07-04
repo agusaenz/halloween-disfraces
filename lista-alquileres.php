@@ -20,7 +20,7 @@ require_once ('sidebar.php');
     body {
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: flex-start;
       height: 100vh;
       background-color: #b39b9b;
       font-family: "Roboto", sans-serif;
@@ -28,9 +28,19 @@ require_once ('sidebar.php');
       margin: 0;
     }
 
-    .container {
-      max-height: 100vh;
+    .sidebar-container {
+      width: 250px;
+      flex-shrink: 0;
+    }
+
+    .content-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 20px;
       overflow-y: auto;
+      margin-top: 70px;
     }
 
     .custom-form {
@@ -60,6 +70,12 @@ require_once ('sidebar.php');
       .btn-lg-custom {
         width: 100%;
         margin-top: 10px;
+      }
+    }
+
+    @media (max-height: 700px) {
+      .content-container {
+        margin-top: 50px;
       }
     }
 
@@ -93,10 +109,12 @@ require_once ('sidebar.php');
 </head>
 
 <body>
-<?php
-  echo $sidebar;
-  ?>
-  <div class="container">
+  <div class="sidebar-container">
+    <?php
+    echo $sidebar;
+    ?>
+  </div>
+  <div class="content-container">
     <form class="custom-form" id="resizable-form" onsubmit="return false;">
       <h1 class="text-center">Lista de Alquileres</h1>
       <div class="row align-items-center justify-content-center">

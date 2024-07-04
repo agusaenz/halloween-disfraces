@@ -20,7 +20,7 @@ require_once ('sidebar.php');
     body {
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: flex-start;
       height: 100vh;
       background-color: #b39b9b;
       font-family: "Roboto", sans-serif;
@@ -28,10 +28,21 @@ require_once ('sidebar.php');
       margin: 0;
     }
 
-    .container {
-      max-height: 100vh;
-      overflow-y: auto;
+    .sidebar-container {
+      width: 250px;
+      flex-shrink: 0;
     }
+
+    .content-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 20px;
+      overflow-y: auto;
+      margin-top: 70px;
+    }
+
 
     .custom-form {
       background: white;
@@ -68,6 +79,12 @@ require_once ('sidebar.php');
       }
     }
 
+    @media (max-height: 700px) {
+      .content-container {
+        margin-top: 50px;
+      }
+    }
+
     .form-group label {
       font-size: 1.1rem;
       font-weight: bold;
@@ -80,10 +97,12 @@ require_once ('sidebar.php');
 </head>
 
 <body>
-<?php
-  echo $sidebar;
-  ?>
-  <div class="container">
+  <div class="sidebar-container">
+    <?php
+    echo $sidebar;
+    ?>
+  </div>
+  <div class="content-container">
     <form class="custom-form" id="resizable-form">
       <h1 class="text-center">Clientes</h1>
       <div class="row">

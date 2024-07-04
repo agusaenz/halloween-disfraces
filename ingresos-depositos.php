@@ -14,13 +14,13 @@ require_once ('sidebar.php');
   <script src="assets/includes/js/jquery-3.7.1.min.js"></script>
   <script src="assets/includes/DataTables/datatables.min.js"></script>
   <link rel="stylesheet" href="assets/css/sidebar.css">
-   <script src="assets/js/sidebar.js"> </script>
+  <script src="assets/js/sidebar.js"> </script>
 
   <style>
     body {
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: flex-start;
       height: 100vh;
       background-color: #b39b9b;
       font-family: "Roboto", sans-serif;
@@ -28,14 +28,19 @@ require_once ('sidebar.php');
       margin: 0;
     }
 
-    .container {
+    .sidebar-container {
+      width: 250px;
+      flex-shrink: 0;
+    }
+
+    .content-container {
+      flex: 1;
       display: flex;
       justify-content: center;
-      align-items: center;
-      height: 100%;
-      width: 100%;
-      max-height: 100vh;
+      align-items: flex-start;
+      padding: 20px;
       overflow-y: auto;
+      margin-top: 70px;
     }
 
     .custom-form {
@@ -75,14 +80,22 @@ require_once ('sidebar.php');
       font-weight: bold;
       text-align: right;
     }
+
+    @media (max-height: 700px) {
+      .content-container {
+        margin-top: 50px;
+      }
+    }
   </style>
 </head>
 
 <body>
-<?php
-  echo $sidebar;
-  ?>
-  <div class="container">
+  <div class="sidebar-container">
+    <?php
+    echo $sidebar;
+    ?>
+  </div>
+  <div class="content-container">
     <form class="custom-form" id="resizable-form">
       <h1 class="text-center">Administración</h1>
       <h5 class="text-center">Seleccione una opción:</h5>
