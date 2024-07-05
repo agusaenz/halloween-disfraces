@@ -7,6 +7,11 @@ $idAlquiler = 0;
 if (isset($_GET["idAlquiler"]) && is_numeric($_GET["idAlquiler"])) {
   $idAlquiler = filter_input(INPUT_GET, 'idAlquiler', FILTER_SANITIZE_NUMBER_INT);
 }
+// __numero_documento de lista-clientes
+$__numero_documento = 0;
+if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"])) {
+  $__numero_documento = filter_input(INPUT_GET, '__numero_documento', FILTER_SANITIZE_NUMBER_INT);
+}
 
 
 
@@ -373,6 +378,7 @@ if (isset($_GET["idAlquiler"]) && is_numeric($_GET["idAlquiler"])) {
   <script>
     // guardo id en global para editar
     var idAlquiler = <?php echo $idAlquiler; ?>;
+    var __numero_documento = <?php echo $__numero_documento; ?>;
 
     function buscarDNI() {
       let dni = $('#documento').val();
@@ -554,6 +560,7 @@ if (isset($_GET["idAlquiler"]) && is_numeric($_GET["idAlquiler"])) {
     }
 
     $(document).ready(function() {
+      // limpio todos los inputs
       $('input').val('');
       $('textarea').val('');
       $('#flexSwitchCheckDefault').prop("checked", false);
@@ -567,6 +574,11 @@ if (isset($_GET["idAlquiler"]) && is_numeric($_GET["idAlquiler"])) {
         buscarAlquiler();
         $('#titulo-alquiler').html('Editar Alquiler');
         $('#boton-guardar').text('Guardar cambios');
+      }
+
+      if (__numero_documento != undefined && __numero_documento != 0 && __numero_documento != -1) {
+        $('#documento').val(__numero_documento);
+        buscarDNI();
       }
 
       const documentoInput = $("#documento");

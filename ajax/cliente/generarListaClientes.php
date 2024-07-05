@@ -33,6 +33,7 @@ try {
     if (count($clientes) > 0) {
         foreach ($clientes as $cliente) {
             $acciones = "<button class='btn btn-primary edit-btn' onclick='clickEditar(event, {$cliente['idCliente']}, \"{$cliente['apellidos']}\", \"{$cliente['nombres']}\", \"{$cliente['numero_documento']}\", \"{$cliente['correo']}\", \"{$cliente['telefono']}\", \"{$cliente['domicilio']}\")'>Ver / Editar</button>
+            <a class='btn btn-warning edit-btn' href='carga-alquiler.php?__numero_documento={$cliente['numero_documento']}'>Alquiler</a>
             <button class='btn btn-danger delete-btn' onclick='borrarCliente(event, {$cliente['idCliente']}, \"{$cliente['apellidos']}\", \"{$cliente['nombres']}\")'>Eliminar</button>";
 
             $tabla[] = [
