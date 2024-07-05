@@ -2,7 +2,7 @@
 session_start();
 
 // timeout
-$sessionTimeout = 14400;
+$sessionTimeout = 3600;
 
 // compara ultima actividad con timeout
 if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > $sessionTimeout)) {
