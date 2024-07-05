@@ -293,19 +293,19 @@ include 'ajax/auth.php';
         autoWidth: false,
         columns: [
           {
-            width: "25%",
+            width: "23%",
+          },
+          {
+            width: "7%",
           },
           {
             width: "10%",
           },
           {
-            width: "13%",
-          },
-          {
             width: "30%",
           },
           {
-            width: "22%",
+            width: "30%",
             createdCell: function (td, cellData, rowData, row, col) {
               $(td).addClass("text-center");
             },
@@ -509,7 +509,7 @@ include 'ajax/auth.php';
       $("#addForm").trigger("reset");
     }
 
-    adjustSidebarWidth(250)  
+    adjustSidebarWidth(200)  
   </script>
 </body>
 

@@ -293,7 +293,7 @@ include 'ajax/auth.php';
         generarTablaAlquileres();
       });
     });
-    adjustSidebarWidth(250)
+    adjustSidebarWidth(200)
   </script>
 </body>
 

@@ -260,7 +260,7 @@ include 'ajax/auth.php';
         tipo = "deposito";
       });
     });
-    adjustSidebarWidth(250)  
+    adjustSidebarWidth(200)  
   </script>
 </body>
 

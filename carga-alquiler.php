@@ -613,7 +613,7 @@ if (isset($_GET["idAlquiler"]) && is_numeric($_GET["idAlquiler"])) {
         }
       });
     });
-    adjustSidebarWidth(250)
+    adjustSidebarWidth(200)
   </script>
 
 </body>

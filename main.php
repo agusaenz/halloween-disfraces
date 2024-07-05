@@ -115,7 +115,7 @@ include 'ajax/auth.php';
     justify-content: center;
     align-items: flex-start;
     padding: 20px;
-    overflow-y: auto;
+    /* overflow-y: auto; */
     margin-top: 70px;
     height: 27vh;
 }
@@ -178,7 +178,7 @@ include 'ajax/auth.php';
       });
     });
 
-    adjustSidebarWidth(250)
+    adjustSidebarWidth(200)
   </script>
 
 </body>
