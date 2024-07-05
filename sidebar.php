@@ -1,12 +1,13 @@
- <?php
- $sidebar="<div class='sidebar-footer'>
-    <form class='search-bar search-bar-sd input-group'>
-      <input class='form-control' type='search' placeholder='Buscar' aria-label='Buscar'>
-      <button class='btn btn-primary' type='submit'>Buscar</button>
+<?php
+$sidebar = "
+<div class='sidebar-footer'>
+    <form class='search-bar search-bar-sd input-group' onsubmit='return searchClients();'>
+      <input class='form-control' id='searchInput' type='search' placeholder='Buscar' aria-label='Buscar'>
+      <button class='btn btn-primary' type='button' onclick='searchClients()'>Buscar</button>
     </form>
-  </div>
+</div>
 
-  <div class='sidebar'>
+<div class='sidebar'>
     <a class='sidebar-brand' href='main.php'>
       <img src='assets/img/Halloween-Logo.png' alt='Logo de Halloween Disfraces'>
     </a>
@@ -30,6 +31,5 @@
         </a>
       </li>
     </ul>
-  </div>
-
- ";
+</div>
+";

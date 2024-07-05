@@ -1,6 +1,11 @@
 <?php
 require_once ('sidebar.php');
 include 'ajax/auth.php';
+
+$__numero_documento = 0;
+if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"])) {
+  $__numero_documento = filter_input(INPUT_GET, '__numero_documento', FILTER_SANITIZE_NUMBER_INT);
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -245,6 +250,7 @@ include 'ajax/auth.php';
   <script>
     var tabla;
     var id__cliente = -1;
+    var __numero_documento = <?php echo $__numero_documento; ?>;
 
     function generarTablaClientes() {
       if (tabla != undefined) tabla.destroy();
@@ -488,8 +494,13 @@ include 'ajax/auth.php';
     }
 
     $(document).ready(function () {
-      $('input[type="text"]').val("");
-      generarTablaClientes();
+      if (__numero_documento && __numero_documento != "" && __numero_documento != undefined) {
+        $('#searchDNI').val(__numero_documento);
+        generarTablaClientes();
+      } else {
+        $('input[type="text"]').val("");
+        generarTablaClientes();
+      }
 
       $("#searchDNI").on("keypress", function (e) {
         if (e.which == 13) {
