@@ -1,5 +1,6 @@
 <?php
 require_once('sidebar.php');
+include 'ajax/auth.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
