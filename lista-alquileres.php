@@ -227,14 +227,14 @@ include 'ajax/auth.php';
         autoWidth: false,
         order: [[2, "desc"]],
         columns: [
-          { width: "25%" },
-          { width: "10%" },
-          { width: "10%" },
-          { width: "10%" },
-          { width: "10%" },
-          { width: "10%" },
+          { width: "27%" },
+          { width: "7%" },
+          { width: "12%" },
+          { width: "12%" },
+          { width: "6%" },
+          { width: "6%" },
           {
-            width: "25%",
+            width: "30%",
             createdCell: function (td, cellData, rowData, row, col) {
               $(td).addClass('text-center');
             }

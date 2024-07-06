@@ -1,5 +1,5 @@
 <?php
-require_once('sidebar.php');
+require_once ('sidebar.php');
 include 'ajax/auth.php';
 
 // recupero id si viene de editar
@@ -263,7 +263,8 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
           <div class="align-center">
             <input type="text" id="documento" class="form-control formcontrol-alquiler" />
             <aside>&nbsp; &nbsp; &nbsp;</aside>
-            <button type="button" id="buscarBtn" class="btn btn-custom btn-custom-alquiler ms-2" onclick="buscarDNI()"><i class="bi bi-search"></i> Buscar</button>
+            <button type="button" id="buscarBtn" class="btn btn-custom btn-custom-alquiler ms-2"
+              onclick="buscarDNI()"><i class="bi bi-search"></i> Buscar</button>
           </div>
         </div>
       </div>
@@ -298,7 +299,7 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
         </div>
       </div>
 
-      <div class="form-check form-switch">
+      <div id="divCheckboxAsociar" class="form-check form-switch">
         <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
         <label class="form-check-label" for="flexSwitchCheckDefault"> Alquiler sin asociar</label>
       </div>
@@ -321,14 +322,16 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
           <label class="form-label"><i class="bi bi-calendar"></i> Fecha de alquiler</label>
           <section class="custom-br-text"></section>
 
-          <input type="date" id="fechaAlq" class="form-control formcontrol-alquiler" placeholder="Fecha fin" lang="es" />
+          <input type="date" id="fechaAlq" class="form-control formcontrol-alquiler" placeholder="Fecha fin"
+            lang="es" />
 
         </div>
         <div class="col-md-6 col-md-6-alquiler form-group">
           <label class="form-label"><i class="bi bi-calendar"></i> Fecha de devolución</label>
           <section class="custom-br-text"></section>
 
-          <input type="date" id="fechaDev" class="form-control formcontrol-alquiler" placeholder="Fecha fin" lang="es" />
+          <input type="date" id="fechaDev" class="form-control formcontrol-alquiler" placeholder="Fecha fin"
+            lang="es" />
 
         </div>
       </div>
@@ -366,9 +369,11 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
       </div>
       <div class="d-grid gap-2 d-md-flex justify-content-md-between">
         <div>
-          <button id="boton-guardar" type="button" class="btn btn-custom btn-custom-alquiler btn-standard-font" onclick="cargarAlquiler()"><i class="bi bi-save"></i>
+          <button id="boton-guardar" type="button" class="btn btn-custom btn-custom-alquiler btn-standard-font"
+            onclick="cargarAlquiler()"><i class="bi bi-save"></i>
             Guardar</button>
-          <button type="button" class="btn btn-danger btn-standard-font"><i class="bi bi-x-circle"></i> Cancelar</button>
+          <button type="button" class="btn btn-danger btn-standard-font"><i class="bi bi-x-circle"></i>
+            Cancelar</button>
         </div>
         <button type="button" class="btn btn-print btn-standard-font"><i class="bi bi-printer"></i> Imprimir</button>
       </div>
@@ -394,7 +399,7 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
         url: "ajax/alquiler/buscarCliente.php",
         data: datos,
         dataType: "json",
-        success: function(data) {
+        success: function (data) {
           if (data.estado == 1) {
             let nombres = data.cliente.nombres;
             let apellido = data.cliente.apellidos;
@@ -410,7 +415,7 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
             alert("No se ha encontrado ningún cliente con DNI " + dni + ".");
           }
         },
-        error: function() {
+        error: function () {
           alert("Ha ocurrido un error durante la operación.");
         },
       });
@@ -419,36 +424,36 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
     function cargarAlquiler() {
       let variablesFaltantes = [];
       let vars = [{
-          id: 'disfraz',
-          name: 'Disfraz'
-        },
-        {
-          id: 'fechaAlq',
-          name: 'Fecha Alquiler'
-        },
-        {
-          id: 'fechaDev',
-          name: 'Fecha Devolución'
-        },
-        {
-          id: 'total',
-          name: 'Total'
-        },
-        {
-          id: 'deposito',
-          name: 'Depósito'
-        },
-        {
-          id: 'formaPago',
-          name: 'Forma de Pago'
-        },
-        {
-          id: 'detalle',
-          name: 'Detalle'
-        }
+        id: 'disfraz',
+        name: 'Disfraz'
+      },
+      {
+        id: 'fechaAlq',
+        name: 'Fecha Alquiler'
+      },
+      {
+        id: 'fechaDev',
+        name: 'Fecha Devolución'
+      },
+      {
+        id: 'total',
+        name: 'Total'
+      },
+      {
+        id: 'deposito',
+        name: 'Depósito'
+      },
+      {
+        id: 'formaPago',
+        name: 'Forma de Pago'
+      },
+      {
+        id: 'detalle',
+        name: 'Detalle'
+      }
       ];
 
-      vars.forEach(function(vars) {
+      vars.forEach(function (vars) {
         if (!$(`#${vars.id}`).val()) {
           variablesFaltantes.push(vars.name);
         }
@@ -463,7 +468,7 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
 
       let datosArray = [];
 
-      vars.forEach(function(vars) {
+      vars.forEach(function (vars) {
         let value = $(`#${vars.id}`).val();
         if (value) {
           datosArray.push(`${vars.id}=${value}`);
@@ -487,17 +492,18 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
         url: "ajax/alquiler/registrarAlquiler.php",
         data: datos,
         dataType: "json",
-        success: function(data) {
+        success: function (data) {
           if (data.estado == 1) {
             alert("Alquiler cargado exitosamente.");
             $('input').val('');
             $('textarea').val('');
+            $('#formaPago').val('efectivo');
             idAlquiler = -1;
           } else if (data.estado == 2) {
             alert("Ha ocurrido un error durante la operación.");
           }
         },
-        error: function() {
+        error: function () {
           alert("Ha ocurrido un error durante la operación.");
         },
       });
@@ -512,21 +518,21 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
           url: 'ajax/alquiler/recuperarAlquiler.php',
           data: datos,
           dataType: 'json',
-          success: function(data) {
+          success: function (data) {
             if (data.estado == 1) {
-              let correo = data.alquiler.correo; //
-              let apellidos = data.alquiler.apellidos; //
-              let deposito = data.alquiler.deposito; //
-              let detalle = data.alquiler.detalle; //
-              let disfraces = data.alquiler.disfraces; //
-              let domicilio = data.alquiler.domicilio; //
-              let fechaAlquiler = data.alquiler.fechaAlquiler; //
-              let fechaDevolucion = data.alquiler.fechaDevolucion; //
+              let correo = data.alquiler.correo;
+              let apellidos = data.alquiler.apellidos;
+              let deposito = data.alquiler.deposito;
+              let detalle = data.alquiler.detalle;
+              let disfraces = data.alquiler.disfraces;
+              let domicilio = data.alquiler.domicilio;
+              let fechaAlquiler = data.alquiler.fechaAlquiler;
+              let fechaDevolucion = data.alquiler.fechaDevolucion;
               let formaDePago = data.alquiler.formaDePago;
-              let nombres = data.alquiler.nombres; //
-              let numero_documento = data.alquiler.numero_documento; //
-              let telefono = data.alquiler.telefono; //
-              let total = data.alquiler.total; //
+              let nombres = data.alquiler.nombres;
+              let numero_documento = data.alquiler.numero_documento;
+              let telefono = data.alquiler.telefono;
+              let total = data.alquiler.total;
 
               $('#documento').val(numero_documento);
               $('#nombre').val(apellidos + ", " + nombres);
@@ -539,38 +545,61 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
               $('#deposito').val(deposito);
               $('#detalle').val(detalle);
 
-              $('#fechaAlq').val(formatDateForInput(fechaAlquiler));
-              $('#fechaDev').val(formatDateForInput(fechaDevolucion));
+              $('#fechaAlq').val(fechaFormateada(fechaAlquiler));
+              $('#fechaDev').val(fechaFormateada(fechaDevolucion));
 
-              // $('#formaPago').val(correo);
+              switch (formaDePago) {
+                case 1:
+                  $('#formaPago').val('efectivo');
+                  break;
+                case 2:
+                  $('#formaPago').val('credito');
+                  break;
+                case 3:
+                  $('#formaPago').val('debito');
+                  break;
+                case 4:
+                  $('#formaPago').val('transferencia');
+                  break;
+                default:
+                  $('#formaPago').val('efectivo');
+                  break;
+              }
 
             }
           },
-          error: function(txt) {
+          error: function (txt) {
             alert("Ha ocurrido un error. Por favor, intente nuevamente en unos minutos.");
           }
         });
       }
     }
 
-    function formatDateForInput(dateStr) {
-      // dateStr is expected to be in 'd/m/Y' format
+    function fechaFormateada(dateStr) {
       let parts = dateStr.split('/');
       return parts[2] + '-' + parts[1] + '-' + parts[0];
     }
 
-    $(document).ready(function() {
+    $(document).ready(function () {
+      const documentoInput = $("#documento");
+      const nombreInput = $("#nombre");
+      const correoInput = $("#correo");
+      const celularInput = $("#celular");
+      const direccionInput = $("#direccion");
+      const buscarBtn = $("#buscarBtn"); // Seleccionar el botón de buscar
+
       // limpio todos los inputs
       $('input').val('');
       $('textarea').val('');
       $('#flexSwitchCheckDefault').prop("checked", false);
-      $(document).ready(function() {
-        $('input[type=number]').on('wheel', function(e) {
-          e.preventDefault();
-        });
+      $('input[type=number]').on('wheel', function (e) {
+        e.preventDefault();
       });
 
       if (idAlquiler != undefined && idAlquiler != 0 && idAlquiler != -1) {
+        documentoInput.prop("disabled", true);
+        buscarBtn.prop("disabled", true);
+        $('#divCheckboxAsociar').hide();
         buscarAlquiler();
         $('#titulo-alquiler').html('Editar Alquiler');
         $('#boton-guardar').text('Guardar cambios');
@@ -581,14 +610,7 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
         buscarDNI();
       }
 
-      const documentoInput = $("#documento");
-      const nombreInput = $("#nombre");
-      const correoInput = $("#correo");
-      const celularInput = $("#celular");
-      const direccionInput = $("#direccion");
-      const buscarBtn = $("#buscarBtn"); // Seleccionar el botón de buscar
-
-      $("#flexSwitchCheckDefault").on("change", function() {
+      $("#flexSwitchCheckDefault").on("change", function () {
         documentoInput.val('');
         nombreInput.val('');
         correoInput.val('');

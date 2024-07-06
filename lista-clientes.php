@@ -298,18 +298,10 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
         searching: false,
         autoWidth: false,
         columns: [
-          {
-            width: "23%",
-          },
-          {
-            width: "7%",
-          },
-          {
-            width: "10%",
-          },
-          {
-            width: "30%",
-          },
+          { width: "23%", },
+          { width: "7%", },
+          { width: "10%", },
+          { width: "30%", },
           {
             width: "30%",
             createdCell: function (td, cellData, rowData, row, col) {
@@ -333,31 +325,12 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
       let telefono = $("#addTelefono").val().trim();
       let domicilio = $("#addDireccion").val().trim();
 
-      if (
-        apellidos === "" ||
-        nombres === "" ||
-        dni === "" ||
-        telefono === "" ||
-        domicilio === ""
-      ) {
+      if (apellidos === "" || nombres === "" || dni === "" || telefono === "" || domicilio === "") {
         alert("Faltan cargar datos.");
         return;
       }
 
-      let datos =
-        "apellidos=" +
-        apellidos +
-        "&nombres=" +
-        nombres +
-        "&numero_documento=" +
-        dni +
-        "&correo=" +
-        correo +
-        "&telefono=" +
-        telefono +
-        "&domicilio=" +
-        domicilio +
-        "&accion=guardar";
+      let datos = "apellidos=" + apellidos + "&nombres=" + nombres + "&numero_documento=" + dni + "&correo=" + correo + "&telefono=" + telefono + "&domicilio=" + domicilio + "&accion=guardar";
 
       $.ajax({
         type: "POST",
@@ -382,16 +355,7 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
       });
     }
 
-    function clickEditar(
-      event,
-      idCliente,
-      apellidos,
-      nombres,
-      numero_documento,
-      correo,
-      telefono,
-      domicilio
-    ) {
+    function clickEditar(event, idCliente, apellidos, nombres, numero_documento, correo, telefono, domicilio) {
       event.preventDefault();
 
       $("#editApellido").val(apellidos),
@@ -413,33 +377,12 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
       telefono = $("#editTelefono").val().trim();
       domicilio = $("#editDireccion").val().trim();
 
-      if (
-        apellidos === "" ||
-        nombres === "" ||
-        dni === "" ||
-        telefono === "" ||
-        domicilio === ""
-      ) {
+      if (apellidos === "" || nombres === "" || dni === "" || telefono === "" || domicilio === "") {
         alert("Faltan cargar datos.");
         return;
       }
 
-      let datos =
-        "idCliente=" +
-        id__cliente +
-        "&apellidos=" +
-        apellidos +
-        "&nombres=" +
-        nombres +
-        "&numero_documento=" +
-        dni +
-        "&correo=" +
-        correo +
-        "&telefono=" +
-        telefono +
-        "&domicilio=" +
-        domicilio +
-        "&accion=editar";
+      let datos = "idCliente=" + id__cliente + "&apellidos=" + apellidos + "&nombres=" + nombres + "&numero_documento=" + dni + "&correo=" + correo + "&telefono=" + telefono + "&domicilio=" + domicilio + "&accion=editar";
 
       $.ajax({
         type: "POST",
@@ -468,11 +411,7 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
 
       let datos = "idCliente=" + idCliente;
 
-      if (
-        confirm(
-          "¿Desea borrar al cliente " + apellidos + ", " + nombres + "?"
-        )
-      ) {
+      if (confirm("¿Desea borrar al cliente " + apellidos + ", " + nombres + "?")) {
         $.ajax({
           type: "POST",
           url: "ajax/cliente/borrarCliente.php",
