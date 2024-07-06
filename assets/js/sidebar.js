@@ -6,12 +6,9 @@ function adjustSidebarWidth(width) {
 }
 
 function searchClients() {
-  // Get the search input value
   let dni = $('#searchInput').val();
 
-  // Redirect to lista-clientes.php with the search value as a URL parameter
   window.location.href = 'lista-clientes.php?__numero_documento=' + encodeURIComponent(dni);
 
-  // Prevent form submission
   return false;
 }

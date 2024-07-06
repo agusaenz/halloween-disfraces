@@ -432,6 +432,13 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
       }
     }
 
+    function hacerAlquiler() {
+      let dni = $('#addDNI').val();
+      window.location.href = 'carga-alquiler.php?__numero_documento=' + encodeURIComponent(dni);
+      
+      return false;
+    }
+
     $(document).ready(function () {
       if (__numero_documento && __numero_documento != "" && __numero_documento != undefined) {
         $('#searchDNI').val(__numero_documento);
