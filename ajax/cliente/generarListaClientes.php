@@ -21,7 +21,7 @@ try {
         $param['dni'] = $dni;
     } else {
         $sqlGet = " SELECT * FROM clientes WHERE activo = 1
-                    ORDER BY apellidos";
+                    ORDER BY idCliente DESC";
     }
 
     $stmt = $db->prepare($sqlGet);

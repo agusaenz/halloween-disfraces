@@ -297,6 +297,7 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
         },
         searching: false,
         autoWidth: false,
+        order: [],
         columns: [
           { width: "23%", },
           { width: "7%", },
