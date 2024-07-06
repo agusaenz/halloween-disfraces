@@ -225,7 +225,7 @@ include 'ajax/auth.php';
         },
         searching: false,
         autoWidth: false,
-        order: [[2, "desc"]],
+        order: [],
         columns: [
           { width: "27%" },
           { width: "7%" },
