@@ -2,7 +2,7 @@
 $sidebar = "
 <div class='sidebar-footer'>
     <form class='search-bar search-bar-sd input-group' onsubmit='return searchClients();'>
-      <input class='form-control' id='searchInput' type='search' placeholder='Buscar' aria-label='Buscar'>
+      <input class='form-control' id='searchInput' type='search' placeholder='Buscar por DNI...' aria-label='Buscar'>
       <button class='btn btn-primary' type='button' onclick='searchClients()'>Buscar</button>
     </form>
 </div>
