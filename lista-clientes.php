@@ -208,29 +208,35 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
         </div>
         <div class="modal-body">
           <form id="addForm">
-            <div class="form-group">
-              <label for="addApellido">Apellido</label>
-              <input type="text" class="form-control" id="addApellido" />
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="addApellido" class="fw-bold fs-6">Apellido</label>
+                <input type="text" class="form-control" id="addApellido" />
+              </div>
+              <div class="col-md-6">
+                <label for="addNombre" class="fw-bold fs-6">Nombres</label>
+                <input type="text" class="form-control" id="addNombre" />
+              </div>
             </div>
-            <div class="form-group">
-              <label for="addNombre">Nombres</label>
-              <input type="text" class="form-control" id="addNombre" />
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="addDNI" class="fw-bold fs-6">DNI</label>
+                <input type="text" class="form-control" id="addDNI" />
+              </div>
+              <div class="col-md-6">
+                <label for="addEmail" class="fw-bold fs-6">Correo Electrónico</label>
+                <input type="email" class="form-control" id="addEmail" />
+              </div>
             </div>
-            <div class="form-group">
-              <label for="addDNI">DNI</label>
-              <input type="text" class="form-control" id="addDNI" />
-            </div>
-            <div class="form-group">
-              <label for="addEmail">Correo Electrónico</label>
-              <input type="email" class="form-control" id="addEmail" />
-            </div>
-            <div class="form-group">
-              <label for="addTelefono">Número de Teléfono</label>
-              <input type="text" class="form-control" id="addTelefono" />
-            </div>
-            <div class="form-group">
-              <label for="addDireccion">Domicilio</label>
-              <input type="text" class="form-control" id="addDireccion" />
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="addTelefono" class="fw-bold fs-6">Número de Teléfono</label>
+                <input type="text" class="form-control" id="addTelefono" />
+              </div>
+              <div class="col-md-6">
+                <label for="addDireccion" class="fw-bold fs-6">Domicilio</label>
+                <input type="text" class="form-control" id="addDireccion" />
+              </div>
             </div>
           </form>
         </div>
@@ -245,6 +251,7 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
       </div>
     </div>
   </div>
+
 
   <!-- scripts -->
   <script>
@@ -436,7 +443,7 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
     function hacerAlquiler() {
       let dni = $('#addDNI').val();
       window.location.href = 'carga-alquiler.php?__numero_documento=' + encodeURIComponent(dni);
-      
+
       return false;
     }
 
