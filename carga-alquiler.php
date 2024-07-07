@@ -246,16 +246,55 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
         margin-top: 50px;
       }
     }
+
+    .btn-back {
+      position: absolute;
+      top: 10px; /* Adjust as needed */
+      left: 10px; /* Adjust as needed */
+      opacity: 0.5;
+      transition: opacity 0.3s;
+    }
+
+
+    .btn-volver{
+      background-color: #267ecf;
+      color: white;
+      padding: 7.3px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: background-color 0.3s ease;
+      
+      position: fixed; /* Fijar posición en la pantalla */
+      bottom: 85vh; /* 5% del alto de la ventana desde la parte inferior */
+      left: 18vw; /* 5% del ancho de la ventana desde la izquierda */
+      z-index: 1000; /* Ajustar índice z para estar por encima de otros elementos */
+    } 
+
+      
+
+
+    }
   </style>
 </head>
 
 <body>
+  
   <div class="sidebar-container">
     <?php
     echo $sidebar;
     ?>
   </div>
+
+  <div>
+      <button type="button" id="volverLista" class="btn btn-volver"
+      onclick="volverLista()"><i class="bi bi-arrow-left" disabled></i> Volver</button>
+  </div>
+
+
   <div class="content-container alquiler">
+
     <form class="custom-form customform-alquiler" id="resizable-form">
       <h2 class="form-title" id="titulo-alquiler">Alquiler</h2>
       <hr class="my-2">
@@ -616,6 +655,7 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
       if (idAlquiler != undefined && idAlquiler != 0 && idAlquiler != -1) {
         documentoInput.prop("disabled", true);
         buscarBtn.prop("disabled", true);
+        volverLista.prop("enabled", true);
         $('#divCheckboxAsociar').hide();
         buscarAlquiler();
         $('#titulo-alquiler').html('Editar Alquiler');
