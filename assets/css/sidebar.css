@@ -140,6 +140,21 @@
       transition: margin-left 0.3s ease, width 0.3s ease; /* Transición suave para el cambio de margen y ancho */
     }
 
+    .logout-button {
+      background-color: #d9534f;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      outline: none;
+      margin-right: 10px;
+    }
+
+    .logout-button:hover {
+      background-color: #c9302c;
+    }
+
     @media (max-width: 991px) {
       .sidebar {
         position: relative;
@@ -153,19 +168,5 @@
         margin-left: 0;
         margin-top: 120px;
         width: 100%;
-      }
-
-      .logout-button {
-        background-color: #d9534f;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 4px;
-        cursor: pointer;
-        outline: none;
-      }
-  
-      .logout-button:hover {
-        background-color: #c9302c;
       }
     }
