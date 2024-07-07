@@ -14,5 +14,17 @@ function searchClients() {
 }
 
 function logout() {
-  alert('Cierre de sesión');
+  $.ajax({
+    url: 'ajax/logout.php',
+    type: 'POST',
+    success: function (response) {
+      var result = JSON.parse(response);
+      if (result.status === 'success') {
+        window.location.href = 'login.html';
+      }
+    },
+    error: function () {
+      alert('Ha ocurrido un error durante la operación.');
+    }
+  });
 }
