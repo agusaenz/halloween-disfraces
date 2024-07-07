@@ -12,3 +12,7 @@ function searchClients() {
 
   return false;
 }
+
+function logout() {
+  alert('Cierre de sesión');
+}

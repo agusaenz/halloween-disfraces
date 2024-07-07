@@ -5,6 +5,7 @@ $sidebar = "
       <input class='form-control' id='searchInput' type='search' placeholder='Buscar por DNI...' aria-label='Buscar'>
       <button class='btn btn-primary' type='button' onclick='searchClients()'>Buscar</button>
     </form>
+    <button class='logout-button' onclick='logout()'>Cerrar sesión</button>
 </div>
 
 <div class='sidebar'>

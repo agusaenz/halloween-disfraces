@@ -1,6 +1,6 @@
 <?php
 require_once ('sidebar.php');
-include 'ajax/auth.php';
+//include 'ajax/auth.php';
 
 // recupero id si viene de editar
 $idAlquiler = 0;
@@ -195,6 +195,10 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
       /* Ajustar el tamaño de los campos al 48% del contenedor para dejar espacio entre ellos */
     }
 
+    .col-md-2-alquiler {
+      flex: 0 0 10%;
+    }
+
     .row-centered {
       display: flex;
       justify-content: center;
@@ -334,6 +338,19 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
             lang="es" />
 
         </div>
+        <div class="col-md-6 col-md-6-alquiler form-group">
+
+            <label class="form-label"><i class="bi bi-building"></i> Escuela</label>
+              <section class="custom-br-text"></section>
+              <input type="number" id="Escuela" class="form-control formcontrol-alquiler" />
+        </div>
+        <div class="col-md-2 col-md-2-alquiler form-group">
+
+            <label class="form-label"><i class="bi bi-handbag"></i> Bolsas</label>
+              <section class="custom-br-text"></section>
+              <input type="number" id="Escuela" class="form-control formcontrol-alquiler" />
+        </div>
+
       </div>
 
       <div class="row mb-4 ">
