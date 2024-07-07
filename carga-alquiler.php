@@ -249,14 +249,16 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
 
     .btn-back {
       position: absolute;
-      top: 10px; /* Adjust as needed */
-      left: 10px; /* Adjust as needed */
+      top: 10px;
+      /* Adjust as needed */
+      left: 10px;
+      /* Adjust as needed */
       opacity: 0.5;
       transition: opacity 0.3s;
     }
 
 
-    .btn-volver{
+    .btn-volver {
       background-color: #267ecf;
       color: white;
       padding: 7.3px 20px;
@@ -265,22 +267,21 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
       cursor: pointer;
       font-size: 0.8rem;
       transition: background-color 0.3s ease;
-      
-      position: fixed; /* Fijar posición en la pantalla */
-      bottom: 85vh; /* 5% del alto de la ventana desde la parte inferior */
-      left: 18vw; /* 5% del ancho de la ventana desde la izquierda */
-      z-index: 1000; /* Ajustar índice z para estar por encima de otros elementos */
-    } 
 
-      
-
-
+      position: fixed;
+      /* Fijar posición en la pantalla */
+      bottom: 85vh;
+      /* 5% del alto de la ventana desde la parte inferior */
+      left: 18vw;
+      /* 5% del ancho de la ventana desde la izquierda */
+      z-index: 1000;
+      /* Ajustar índice z para estar por encima de otros elementos */
     }
   </style>
 </head>
 
 <body>
-  
+
   <div class="sidebar-container">
     <?php
     echo $sidebar;
@@ -288,8 +289,7 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
   </div>
 
   <div>
-      <button type="button" id="volverLista" class="btn btn-volver"
-      onclick="volverLista()"><i class="bi bi-arrow-left" disabled></i> Volver</button>
+    <a id="volverLista" class="btn btn-volver" href="lista-alquileres.php"><i class="bi bi-arrow-left"></i> Volver</a>
   </div>
 
 
@@ -379,15 +379,15 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
         </div>
         <div class="col-md-6 col-md-6-alquiler form-group">
 
-            <label class="form-label"><i class="bi bi-building"></i> Escuela</label>
-              <section class="custom-br-text"></section>
-              <input type="number" id="Escuela" class="form-control formcontrol-alquiler" />
+          <label class="form-label"><i class="bi bi-building"></i> Escuela</label>
+          <section class="custom-br-text"></section>
+          <input type="text" id="escuela" class="form-control formcontrol-alquiler" />
         </div>
         <div class="col-md-2 col-md-2-alquiler form-group">
 
-            <label class="form-label"><i class="bi bi-handbag"></i> Bolsas</label>
-              <section class="custom-br-text"></section>
-              <input type="number" id="Escuela" class="form-control formcontrol-alquiler" />
+          <label class="form-label"><i class="bi bi-handbag"></i> Bolsas</label>
+          <section class="custom-br-text"></section>
+          <input type="number" id="bolsas" class="form-control formcontrol-alquiler" />
         </div>
 
       </div>
@@ -431,7 +431,7 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
           <button type="button" class="btn btn-danger btn-standard-font"><i class="bi bi-x-circle"></i>
             Cancelar</button>
         </div>
-        <button type="button" class="btn btn-print btn-standard-font"><i class="bi bi-printer"></i> Imprimir</button>
+        <button type="button" class="btn btn-print btn-standard-font" onclick="imprimirAlquiler()"><i class="bi bi-printer"></i> Imprimir</button>
       </div>
     </form>
   </div>
@@ -636,6 +636,44 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
       return parts[2] + '-' + parts[1] + '-' + parts[0];
     }
 
+    function imprimirAlquiler() {
+      let documento = $("#documento").val();
+      let nombre = $("#nombre").val();
+      let correo = $("#correo").val();
+      let telefono = $("#celular").val();
+      let direccion = $("#direccion").val();
+
+      let disfraz = $('#disfraz').val();
+      let fechaAlq = $('#fechaAlq').val();
+      let fechaDev = $('#fechaDev').val();
+      let escuela = $('#escuela').val();
+      let bolsas = $('#bolsas').val();
+      let total = $('#total').val();
+      let deposito = $('#deposito').val();
+      let formaPago = $('#formaPago').val();
+      let detalle = $('#detalle').val();
+
+      let datos = "documento=" + documento + "&nombre=" + nombre + "&correo=" + correo + "&telefono=" + telefono +
+        "&direccion=" + direccion + "&disfraz=" + disfraz + "&fechaAlq=" + fechaAlq +
+        "&fechaDev=" + fechaDev + "&escuela=" + escuela + "&bolsas=" + bolsas +
+        "&total=" + total + "&deposito=" + deposito + "&formaPago=" + formaPago +
+        "&detalle=" + detalle;
+
+      $.ajax({
+        type: 'POST',
+        url: 'ajax/generar_pdf.php',
+        data: datos,
+        xhrFields: {
+          responseType: 'blob'
+        },
+        success: function (response) {
+          var blob = new Blob([response], { type: 'application/pdf' });
+          var url = URL.createObjectURL(blob);
+          window.open(url);
+        }
+      });
+    }
+
     $(document).ready(function () {
       const documentoInput = $("#documento");
       const nombreInput = $("#nombre");
@@ -643,6 +681,8 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
       const celularInput = $("#celular");
       const direccionInput = $("#direccion");
       const buscarBtn = $("#buscarBtn"); // Seleccionar el botón de buscar
+      const volverLista = $('#volverLista');
+      volverLista.hide();
 
       // limpio todos los inputs
       $('input').val('');
@@ -655,7 +695,7 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
       if (idAlquiler != undefined && idAlquiler != 0 && idAlquiler != -1) {
         documentoInput.prop("disabled", true);
         buscarBtn.prop("disabled", true);
-        volverLista.prop("enabled", true);
+        volverLista.show();
         $('#divCheckboxAsociar').hide();
         buscarAlquiler();
         $('#titulo-alquiler').html('Editar Alquiler');
