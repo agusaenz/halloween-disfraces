@@ -289,7 +289,8 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
   </div>
 
   <div>
-    <a id="volverLista" class="btn btn-volver" href="lista-alquileres.php"><i class="bi bi-arrow-left"></i> Volver</a>
+    <a id="volverListaAlq" class="btn btn-volver" href="lista-alquileres.php"><i class="bi bi-arrow-left"></i> Volver</a>
+    <a id="volverListaCli" class="btn btn-volver" href="lista-clientes.php"><i class="bi bi-arrow-left"></i> Volver</a>
   </div>
 
 
@@ -681,8 +682,10 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
       const celularInput = $("#celular");
       const direccionInput = $("#direccion");
       const buscarBtn = $("#buscarBtn"); // Seleccionar el botón de buscar
-      const volverLista = $('#volverLista');
-      volverLista.hide();
+      const volverListaAlq = $('#volverListaAlq');
+      const volverListaCli = $('#volverListaCli');
+      volverListaAlq.hide();
+      volverListaCli.hide();
 
       // limpio todos los inputs
       $('input').val('');
@@ -695,7 +698,7 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
       if (idAlquiler != undefined && idAlquiler != 0 && idAlquiler != -1) {
         documentoInput.prop("disabled", true);
         buscarBtn.prop("disabled", true);
-        volverLista.show();
+        volverListaAlq.show();
         $('#divCheckboxAsociar').hide();
         buscarAlquiler();
         $('#titulo-alquiler').html('Editar Alquiler');
@@ -705,6 +708,10 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
       if (__numero_documento != undefined && __numero_documento != 0 && __numero_documento != -1) {
         $('#documento').val(__numero_documento);
         buscarDNI();
+        documentoInput.prop("disabled", true);
+        buscarBtn.prop("disabled", true);
+        volverListaCli.show();
+        $('#divCheckboxAsociar').hide();
       }
 
       $("#flexSwitchCheckDefault").on("change", function () {
