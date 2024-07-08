@@ -19,8 +19,7 @@ $sidebar = "
         </a>
       </li>
       <li class='nav-item'>
-        <a class='nav-link' href='#'>
-          <img src='assets/img/reserva.png' alt='Alquileres Icon'> Alquiler&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </a>
+        <!--<a class='nav-link' href='#'><img src='assets/img/reserva.png' alt='Alquileres Icon'> Alquiler&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </a>-->
         <ul class='dropdown-menu'>
           <li><a class='dropdown-item' href='lista-alquileres.php'><i class='bi bi-list'></i> Lista de alquileres</a></li>
           <li><a class='dropdown-item' href='carga-alquiler.php'><i class='bi bi-plus-circle'></i> Nuevo alquiler</a></li>
