@@ -1,6 +1,6 @@
 <?php
 require_once ('sidebar.php');
-//include 'ajax/auth.php';
+include 'ajax/auth.php';
 
 // recupero id si viene de editar
 $idAlquiler = 0;
