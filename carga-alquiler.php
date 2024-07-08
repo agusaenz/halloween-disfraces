@@ -429,7 +429,7 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
           <button id="boton-guardar" type="button" class="btn btn-custom btn-custom-alquiler btn-standard-font"
             onclick="cargarAlquiler()"><i class="bi bi-save"></i>
             Guardar</button>
-          <button type="button" class="btn btn-danger btn-standard-font"><i class="bi bi-x-circle"></i>
+          <button type="button" class="btn btn-danger btn-standard-font" onclick="window.location.href='main.php';return false;"><i class="bi bi-x-circle"></i>
             Cancelar</button>
         </div>
         <button type="button" class="btn btn-print btn-standard-font" onclick="imprimirAlquiler()"><i class="bi bi-printer"></i> Imprimir</button>

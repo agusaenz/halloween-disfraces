@@ -59,7 +59,7 @@ try {
             $dni = $alquiler['numero_documento'] ? $alquiler['numero_documento'] : '-';
 
             $acciones = "<a class='btn btn-primary verAlquilerBtn' href='carga-alquiler.php?idAlquiler={$alquiler['idAlquiler']}'>Ver / editar</a>
-            <button class='btn btn-success verAlquilerBtn'>Imprimir</button>
+            <!--<button class='btn btn-success verAlquilerBtn'>Imprimir</button>-->
             <button class='btn btn-danger eliminarAlquilerBtn ml-2' onclick='borrarAlquiler(event, {$alquiler['idAlquiler']})'>Eliminar</button>";
 
             $tabla[] = [
