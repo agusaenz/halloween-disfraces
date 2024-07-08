@@ -544,6 +544,11 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
       if (idAlquiler != undefined && idAlquiler != 0) __id = idAlquiler;
       datos += "&idAlquiler=" + __id;
 
+      let escuela = $('#escuela').val();
+      let bolsas = $('#bolsas').val();
+      if (escuela != undefined && escuela != '') datos += "&escuela=" + escuela;
+      if (bolsas != undefined && bolsas != '' && bolsas != 0) datos += "&bolsas=" + bolsas;
+
       $.ajax({
         type: "POST",
         url: "ajax/alquiler/registrarAlquiler.php",
@@ -590,6 +595,8 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
               let numero_documento = data.alquiler.numero_documento;
               let telefono = data.alquiler.telefono;
               let total = data.alquiler.total;
+              let escuela = data.alquiler.escuela;
+              let bolsas = data.alquiler.bolsas;
 
               $('#documento').val(numero_documento);
               $('#nombre').val(apellidos + ", " + nombres);
@@ -601,6 +608,8 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
               $('#total').val(total);
               $('#deposito').val(deposito);
               $('#detalle').val(detalle);
+              $('#escuela').val(escuela);
+              $('#bolsas').val(bolsas);
 
               $('#fechaAlq').val(fechaFormateada(fechaAlquiler));
               $('#fechaDev').val(fechaFormateada(fechaDevolucion));

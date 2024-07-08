@@ -22,6 +22,8 @@ $total = isset($_POST["total"]) ? filter_input(INPUT_POST, 'total', FILTER_SANIT
 $deposito = isset($_POST["deposito"]) ? filter_input(INPUT_POST, 'deposito', FILTER_SANITIZE_STRING) : null;
 $formaPago = isset($_POST["formaPago"]) ? filter_input(INPUT_POST, 'formaPago', FILTER_SANITIZE_STRING) : null;
 $detalle = isset($_POST["detalle"]) ? filter_input(INPUT_POST, 'detalle', FILTER_SANITIZE_STRING) : null;
+$escuela = isset($_POST["escuela"]) ? filter_input(INPUT_POST, 'escuela', FILTER_SANITIZE_STRING) : null;
+$bolsas = isset($_POST["bolsas"]) ? filter_input(INPUT_POST, 'bolsas', FILTER_SANITIZE_STRING) : null;
 
 if (isset($_POST['idAlquiler']))
     $idAlquiler = filter_input(INPUT_POST, 'idAlquiler', FILTER_SANITIZE_NUMBER_INT);
@@ -59,7 +61,8 @@ try {
         $sqlUpd = " UPDATE alquileres
                     SET disfraces = :disfraces, detalle = :detalle, total = :total,
                         deposito = :deposito, formaDePago = :formaDePago,
-                        fechaAlquiler = :fechaAlquiler, fechaDevolucion = :fechaDevolucion
+                        fechaAlquiler = :fechaAlquiler, fechaDevolucion = :fechaDevolucion,
+                        escuela = :escuela, bolsas = :bolsas
                     WHERE idAlquiler = :idAlquiler";
 
         $param = [
@@ -70,7 +73,9 @@ try {
             ":formaDePago" => $formaPago,
             ":fechaAlquiler" => $fechaAlq,
             ":fechaDevolucion" => $fechaDev,
-            ":idAlquiler" => $idAlquiler
+            ":idAlquiler" => $idAlquiler,
+            ":escuela" => $escuela,
+            ":bolsas" => $bolsas
         ];
 
         $stmtUpd = $db->prepare($sqlUpd);
@@ -92,8 +97,8 @@ try {
             if ($resultado) {
                 $idCliente = $resultado['idCliente'];
 
-                $sql = "INSERT INTO alquileres (idCliente, disfraces, detalle, total, deposito, formaDePago, fechaAlquiler, fechaDevolucion)
-                        VALUES (:idCliente, :disfraz, :detalle, :total, :deposito, :formaPago, :fechaAlq, :fechaDev)";
+                $sql = "INSERT INTO alquileres (idCliente, disfraces, detalle, total, deposito, formaDePago, fechaAlquiler, fechaDevolucion, escuela, bolsas)
+                        VALUES (:idCliente, :disfraz, :detalle, :total, :deposito, :formaPago, :fechaAlq, :fechaDev, :escuela, :bolsas)";
 
                 $param = [
                     ":idCliente" => $idCliente,
@@ -103,7 +108,9 @@ try {
                     ":deposito" => $deposito,
                     ":formaPago" => $formaPago,
                     ":fechaAlq" => $fechaAlq,
-                    ":fechaDev" => $fechaDev
+                    ":fechaDev" => $fechaDev,
+                    ":escuela" => $escuela,
+                    ":bolsas" => $bolsas
                 ];
             } else {
                 $retorno['estado'] = 2;
@@ -112,8 +119,8 @@ try {
                 die();
             }
         } else { // caso sin asociar
-            $sql = "INSERT INTO alquileres (disfraces, detalle, total, deposito, formaDePago, fechaAlquiler, fechaDevolucion)
-                        VALUES (:disfraz, :detalle, :total, :deposito, :formaPago, :fechaAlq, :fechaDev)";
+            $sql = "INSERT INTO alquileres (disfraces, detalle, total, deposito, formaDePago, fechaAlquiler, fechaDevolucion, escuela, bolsas)
+                        VALUES (:disfraz, :detalle, :total, :deposito, :formaPago, :fechaAlq, :fechaDev, :escuela, :bolsas)";
 
             $param = [
                 ":disfraz" => $disfraz,
@@ -122,7 +129,9 @@ try {
                 ":deposito" => $deposito,
                 ":formaPago" => $formaPago,
                 ":fechaAlq" => $fechaAlq,
-                ":fechaDev" => $fechaDev
+                ":fechaDev" => $fechaDev,
+                ":escuela" => $escuela,
+                ":bolsas" => $bolsas
             ];
         }
         $stmtInsert = $db->prepare($sql);
