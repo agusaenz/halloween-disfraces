@@ -9,6 +9,7 @@ include 'ajax/auth.php';
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lista de Alquileres</title>
+  <link rel="icon" href="assets/img/icon.png">
   <link rel="stylesheet" href="assets/includes/css/bootstrap.min.css" />
   <link rel="stylesheet" href="assets/includes/DataTables/datatables.min.css">
   <script src="assets/includes/js/jquery-3.7.1.min.js"></script>

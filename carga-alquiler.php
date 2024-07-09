@@ -13,8 +13,6 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
   $__numero_documento = filter_input(INPUT_GET, '__numero_documento', FILTER_SANITIZE_NUMBER_INT);
 }
 
-
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -23,6 +21,7 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Halloween Disfraces</title>
+  <link rel="icon" href="assets/img/icon.png">
 
   <!-- Librerías -->
   <link rel="stylesheet" href="assets/includes/css/bootstrap.min.css">

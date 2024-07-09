@@ -9,6 +9,7 @@ include 'ajax/auth.php';
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Administración</title>
+  <link rel="icon" href="assets/img/icon.png">
   <link rel="stylesheet" href="assets/includes/css/bootstrap.min.css" />
   <link rel="stylesheet" href="assets/includes/DataTables/datatables.min.css" />
   <script defer src="assets/includes/js/bootstrap.bundle.min.js"></script>
