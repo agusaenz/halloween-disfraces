@@ -20,7 +20,7 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Halloween Disfraces</title>
+  <title>Cargar alquiler</title>
   <link rel="icon" href="assets/img/icon.png">
 
   <!-- Librerías -->
@@ -195,7 +195,7 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
     }
 
     .col-md-2-alquiler {
-      flex: 0 0 10%;
+      flex: 0 0 40%;
     }
 
     .row-centered {
@@ -246,16 +246,6 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
       }
     }
 
-    .btn-back {
-      position: absolute;
-      top: 10px;
-      /* Adjust as needed */
-      left: 10px;
-      /* Adjust as needed */
-      opacity: 0.5;
-      transition: opacity 0.3s;
-    }
-
 
     .btn-volver {
       background-color: #267ecf;
@@ -266,15 +256,15 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
       cursor: pointer;
       font-size: 0.8rem;
       transition: background-color 0.3s ease;
-
       position: fixed;
-      /* Fijar posición en la pantalla */
       bottom: 85vh;
-      /* 5% del alto de la ventana desde la parte inferior */
       left: 18vw;
-      /* 5% del ancho de la ventana desde la izquierda */
       z-index: 1000;
-      /* Ajustar índice z para estar por encima de otros elementos */
+    }
+
+    .btn-volver:hover {
+      background-color: #267ecf;
+    
     }
   </style>
 </head>
@@ -361,7 +351,7 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
       </div>
 
       <div class="row mb-4">
-        <div class="col-md-6 col-md-6-alquiler form-group">
+        <div class="col-md-2 col-md-2-alquiler form-group">
           <label class="form-label"><i class="bi bi-calendar"></i> Fecha de alquiler</label>
           <section class="custom-br-text"></section>
 
@@ -369,7 +359,7 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
             lang="es" />
 
         </div>
-        <div class="col-md-6 col-md-6-alquiler form-group">
+        <div class="col-md-2 col-md-2-alquiler form-group">
           <label class="form-label"><i class="bi bi-calendar"></i> Fecha de devolución</label>
           <section class="custom-br-text"></section>
 
@@ -377,7 +367,7 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
             lang="es" />
 
         </div>
-        <div class="col-md-6 col-md-6-alquiler form-group">
+        <div class="col-md-2 col-md-2-alquiler form-group">
 
           <label class="form-label"><i class="bi bi-building"></i> Escuela</label>
           <section class="custom-br-text"></section>
