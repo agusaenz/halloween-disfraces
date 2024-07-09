@@ -163,29 +163,35 @@ if (isset($_GET["__numero_documento"]) && is_numeric($_GET["__numero_documento"]
         </div>
         <div class="modal-body">
           <form id="editForm">
-            <div class="form-group">
-              <label for="editApellido">Apellido</label>
-              <input type="text" class="form-control" id="editApellido" />
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="editApellido" class="fw-bold fs-6">Apellido</label>
+                <input type="text" class="form-control" id="editApellido" />
+              </div>
+              <div class="col-md-6">
+                <label for="editNombre" class="fw-bold fs-6">Nombres</label>
+                <input type="text" class="form-control" id="editNombre" />
+              </div>
             </div>
-            <div class="form-group">
-              <label for="editNombre">Nombres</label>
-              <input type="text" class="form-control" id="editNombre" />
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="editDNI" class="fw-bold fs-6">DNI</label>
+                <input type="text" class="form-control" id="editDNI" />
+              </div>
+              <div class="col-md-6">
+                <label for="editEmail" class="fw-bold fs-6">Correo Electrónico</label>
+                <input type="email" class="form-control" id="editEmail" />
+              </div>
             </div>
-            <div class="form-group">
-              <label for="editDNI">DNI</label>
-              <input type="text" class="form-control" id="editDNI" />
-            </div>
-            <div class="form-group">
-              <label for="editEmail">Correo Electrónico</label>
-              <input type="email" class="form-control" id="editEmail" />
-            </div>
-            <div class="form-group">
-              <label for="editTelefono">Número de Teléfono</label>
-              <input type="text" class="form-control" id="editTelefono" />
-            </div>
-            <div class="form-group">
-              <label for="editDireccion">Domicilio</label>
-              <input type="text" class="form-control" id="editDireccion" />
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="editTelefono" class="fw-bold fs-6">Número de Teléfono</label>
+                <input type="text" class="form-control" id="editTelefono" />
+              </div>
+              <div class="col-md-6">
+                <label for="editDireccion" class="fw-bold fs-6">Domicilio</label>
+                <input type="text" class="form-control" id="editDireccion" />
+              </div>
             </div>
             <input type="hidden" id="editId" />
           </form>
